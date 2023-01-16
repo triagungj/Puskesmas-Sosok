@@ -1,0 +1,7 @@
+
+.table-custom-wrapper{
+    min-height: 300px;
+}
+.table-custom tr th{
+    text-align: center;
+}
