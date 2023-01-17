@@ -1,6 +1,6 @@
 <div class="modal-dialog">
     <div class="modal-content">
-        <form action="<?= base_url('user/tambah_dokter'); ?>" method="post">
+        <form action="<?= base_url('dokter/tambah_dokter'); ?>" method="post">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Tambah Dokter Baru</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -15,12 +15,6 @@
                 <div class="mb-3 text-input form-group">
                     <label for="inputPassword" class="text-dark">Password</label>
                     <input required name="password" type="password" class="form-control" id="inputPassword" placeholder="Password" />
-                </div>
-                <div class="form-group" hidden>
-                    <label for="selectJabatan">Jabatan</label>
-                    <select required name="jabatan" class="form-control" id="selectJabatan">
-                        <option value="dokter" selected>Dokter</option>
-                    </select>
                 </div>
                 <div class="mb-3 text-input form-group">
                     <label for="inputNama" class="text-dark">Nama Dokter</label>

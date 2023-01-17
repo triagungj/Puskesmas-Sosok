@@ -40,7 +40,7 @@
             <button onclick="showEditModal('<?= $user->id_user ?>', '<?= $user->username; ?>', '<?= $user->password; ?>', '<?= $user->nama; ?>','<?= $user->jabatan; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_user">
               <i class="fas fa-edit"></i></button>
           </td>
-          </td>
+
           <td class="text-center">
             <button onclick="showDeleteModal('<?= $user->id_user ?>', '<?= $user->username; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_user">
               <i class="fas fa-trash"></i></button>

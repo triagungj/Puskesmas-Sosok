@@ -14,13 +14,25 @@ class Model_dokter extends CI_Model
         $this->db->limit($offset, $per_page);
         return $this->db->get();
     }
-    public function input_data($data)
+    public function input_data($dataUser, $dataDokter)
     {
-        $this->db->insert($this->table, $data);
+        $dataUser = $this->db->insert('user', $dataUser);
+        $idUser = $this->db->insert_id();
+        $dataDokter['id_user'] = $idUser;
+        if ($idUser != null && $this->db->insert($this->table, $dataDokter)) {
+            return true;
+        } else {
+            return false;
+        }
     }
-    public function edit_dokter($data, $id)
+    public function edit_dokter($dataUser, $dataDokter, $id)
     {
-        $this->db->update($this->table, $data, array('id_dokter' => $id));
+        $updateUser = $this->db->update('user', $dataUser, array('id_user' => $dataDokter['id_user']));
+        if ($updateUser && $this->db->update($this->table, $dataDokter, array('id_dokter' => $id))) {
+            return true;
+        } else {
+            return false;
+        }
     }
     public function delete_data($data)
     {

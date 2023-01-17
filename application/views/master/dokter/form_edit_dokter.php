@@ -11,6 +11,15 @@
                 <div class="mb-3 text-input form-group">
                     <label for="idUserEdit" class="text-dark">Edit Dokter dengan nama <b><span id="namaEdit"></b></span></label>
                     <input hidden required name="id_dokter" type="text" class="form-control" id="idDokterEdit" />
+                    <input hidden required name="id_user" type="text" class="form-control" id="idUserEdit" />
+                </div>
+                <div class="mb-3 text-input form-group">
+                    <label for="inputUsernameEdit" class="text-dark">Username</label>
+                    <input required name="username" type="text" class="form-control" id="inputUsernameEdit" placeholder="Username" />
+                </div>
+                <div class="mb-3 text-input form-group">
+                    <label for="inputPasswordEdit" class="text-dark">Password</label>
+                    <input name="password" type="password" class="form-control" id="inputPasswordEdit" placeholder="Password" />
                 </div>
                 <div class="mb-3 text-input form-group">
                     <label for="inputNama" class="text-dark">Nama Dokter</label>
@@ -42,8 +51,10 @@
 </div>
 
 <script>
-    function showEditModal(id_dokter, nama_dokter, tgl_lahir, jk, spesialisasi) {
+    function showEditModal(username, id_dokter, id_user, nama_dokter, tgl_lahir, jk, spesialisasi) {
+        document.getElementById("inputUsernameEdit").value = username;
         document.getElementById("idDokterEdit").value = id_dokter;
+        document.getElementById("idUserEdit").value = id_user;
         document.getElementById("inputNamaEdit").value = nama_dokter;
         document.getElementById("namaEdit").innerHTML = nama_dokter;
         document.getElementById("inputTglLahirEdit").value = tgl_lahir;

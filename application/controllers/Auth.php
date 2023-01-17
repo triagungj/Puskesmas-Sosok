@@ -24,6 +24,7 @@ class Auth extends CI_Controller
         $data_user = $this->model_user->login($data)->row();
         if ($status == 1) {
             $_SESSION["id_user"] = $data_user->id_user;
+            $_SESSION["nama"] = $data_user->nama;
             $_SESSION["jabatan"] = $data_user->jabatan;
             redirect(base_url('dashboard'));
         } else {
