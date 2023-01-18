@@ -35,6 +35,10 @@ class Model_user extends CI_Model
     }
     public function delete_data($data)
     {
-        $this->db->delete($this->table, $data);
+        if ($this->db->delete($this->table, $data)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

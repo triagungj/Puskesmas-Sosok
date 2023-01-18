@@ -53,22 +53,28 @@ class User extends CI_Controller
         $id_user = $this->input->post('id_user');
         $username = $this->input->post('username');
         $password = $this->input->post('password');
+        $nama = $this->input->post('nama');
         $jabatan = $this->input->post('jabatan');
 
         if ($password != null) {
             $data = array(
                 'username' => $username,
                 'password' => $password,
+                'nama' => $nama,
                 'jabatan' => $jabatan,
             );
         } else {
             $data = array(
                 'username' => $username,
+                'nama' => $nama,
                 'jabatan' => $jabatan,
             );
         }
 
         if ($this->model_user->edit_user($data, $id_user)) {
+            if ($this->session->id_user == $id_user) {
+                $_SESSION["jabatan"] = $jabatan;
+            }
             $this->session->set_flashdata('message_success', 'Berhasil mengupdate data');
         } else {
             $error =  $this->db->error();
@@ -81,7 +87,14 @@ class User extends CI_Controller
     {
         $id_user = $this->input->post('id_user');
         $data = array('id_user' => $id_user);
-        $this->model_user->delete_data($data);
+
+        if ($this->model_user->delete_data($data)) {
+            $this->session->set_flashdata('message_success', 'Berhasil menghapus data');
+        } else {
+            $error =  $this->db->error();
+            $this->session->set_flashdata('message_failure', $error['message']);
+        }
+
         redirect(base_url('user'));
     }
 }

@@ -1,53 +1,59 @@
 <div class="container-fluid">
   <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="#tambah_user"><i class="fas fa-plus fa-sm"></i>Tambah User</button>
   <div class="table-custom-wrapper">
-    <table class="table table-bordered table-custom">
-      <tr>
-        <th>NO</th>
-        <th>USERNAME</th>
-        <th>NAMA</th>
-        <th>PASSWORD</th>
-        <th>JABATAN</th>
-        <th colspan="2">AKSI</th>
-      </tr>
-
-      <?php
-      $no = $offset_index + 1;
-      foreach ($user as $user) : ?>
+    <?php if ($user != null) { ?>
+      <table class="table table-bordered table-custom">
         <tr>
-          <th><?= $no++ ?></th>
-          <td><?= $user->username ?></td>
-          <td><?= $user->nama ?></td>
-          <td>
-            <div class="d-flex justify-content-between align-middle">
-              <div>
-                <span id="passShow<?= $no; ?>" class="d-none"><?= $user->password ?></span>
-                <span id="passHide<?= $no; ?>">********</span>
-              </div>
-
-              <button id="btnShowPass<?= $no; ?>" onclick="showUserPassword(<?= $no; ?>)" class="btn p-0 m-0 text-small">
-                <i class="fa fa-eye-slash"></i>
-              </button>
-              <button id="btnHidePass<?= $no; ?>" onclick="hideUserPassword(<?= $no; ?>)" class="btn p-0 m-0 text-small d-none">
-                <i class="fa fa-eye"></i>
-              </button>
-
-            </div>
-          </td>
-          <td><?= str_replace("_", " ", ucwords($user->jabatan, "_")) ?></td>
-
-          <td class="text-center">
-            <button onclick="showEditModal('<?= $user->id_user ?>', '<?= $user->username; ?>', '<?= $user->password; ?>', '<?= $user->nama; ?>','<?= $user->jabatan; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_user">
-              <i class="fas fa-edit"></i></button>
-          </td>
-
-          <td class="text-center">
-            <button onclick="showDeleteModal('<?= $user->id_user ?>', '<?= $user->username; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_user">
-              <i class="fas fa-trash"></i></button>
-          </td>
+          <th>NO</th>
+          <th>USERNAME</th>
+          <th>NAMA</th>
+          <th>PASSWORD</th>
+          <th>JABATAN</th>
+          <th colspan="2">AKSI</th>
         </tr>
-      <?php endforeach; ?>
-    </table>
+
+        <?php
+        $no = $offset_index + 1;
+        foreach ($user as $user) : ?>
+          <tr>
+            <th><?= $no++ ?></th>
+            <td><?= $user->username ?></td>
+            <td><?= $user->nama ?></td>
+            <td>
+              <div class="d-flex justify-content-between align-middle">
+                <div>
+                  <span id="passShow<?= $no; ?>" class="d-none"><?= $user->password ?></span>
+                  <span id="passHide<?= $no; ?>">********</span>
+                </div>
+
+                <button id="btnShowPass<?= $no; ?>" onclick="showUserPassword(<?= $no; ?>)" class="btn p-0 m-0 text-small">
+                  <i class="fa fa-eye-slash"></i>
+                </button>
+                <button id="btnHidePass<?= $no; ?>" onclick="hideUserPassword(<?= $no; ?>)" class="btn p-0 m-0 text-small d-none">
+                  <i class="fa fa-eye"></i>
+                </button>
+              </div>
+            </td>
+            <td><?= str_replace("_", " ", ucwords($user->jabatan, "_")) ?></td>
+
+            <td class="text-center">
+              <button onclick="showEditModal('<?= $user->id_user ?>', '<?= $user->username; ?>', '<?= $user->password; ?>', '<?= $user->nama; ?>','<?= $user->jabatan; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_user">
+                <i class="fas fa-edit"></i></button>
+            </td>
+
+            <td class="text-center">
+              <?php if ($this->session->id_user != $user->id_user) { ?>
+                <button onclick="showDeleteModal('<?= $user->id_user ?>', '<?= $user->username; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_user">
+                  <i class="fas fa-trash"></i>
+                </button>
+              <?php } ?>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </table>
+    <?php } else {
+      $this->load->view('templates/empty_state');
+    } ?>
   </div>
 
   <hr>

@@ -30,47 +30,53 @@
                 Master Data
             </div>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item <?= $page == 'user' ? 'active' : ''; ?>">
-                <a class="nav-link" href="<?php echo base_url('user') ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>User</span></a>
-            </li>
+            <?php if ($this->session->jabatan != 'dokter') { ?>
+                <li class="nav-item <?= $page == 'user' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo base_url('user') ?>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>User</span></a>
+                </li>
+            <?php } ?>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item <?= $page == 'dokter' ? 'active' : ''; ?>">
-                <a class="nav-link" href="<?php echo base_url('dokter') ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Dokter</span></a>
-            </li>
+            <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
+                <li class="nav-item <?= $page == 'dokter' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo base_url('dokter') ?>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Dokter</span></a>
+                </li>
+            <?php } ?>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item <?= $page == 'poli' ? 'active' : ''; ?>">
-                <a class=" nav-link" href="<?php echo base_url('poli') ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Poli</span></a>
-            </li>
+            <?php if ($this->session->jabatan == 'admin') { ?>
+                <li class="nav-item <?= $page == 'poli' ? 'active' : ''; ?>">
+                    <a class=" nav-link" href="<?php echo base_url('poli') ?>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Poli</span></a>
+                </li>
+            <?php } ?>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item <?= $page == 'dokter_poli' ? 'active' : ''; ?>">
-                <a class="nav-link" href="<?php echo base_url('dokter_poli') ?>">
-                    <i class=" fas fa-fw fa-chart-area"></i>
-                    <span>Dokter Poli</span></a>
-            </li>
+            <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
+                <li class="nav-item <?= $page == 'dokter_poli' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo base_url('dokter_poli') ?>">
+                        <i class=" fas fa-fw fa-chart-area"></i>
+                        <span>Dokter Poli</span></a>
+                </li>
+            <?php } ?>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item <?= $page == 'pasien' ? 'active' : ''; ?>">
-                <a class="nav-link" href="<?php echo base_url('pasien') ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Pasien</span></a>
-            </li>
+            <?php if ($this->session->jabatan != 'dokter') { ?>
+                <li class="nav-item <?= $page == 'pasien' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo base_url('pasien') ?>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Pasien</span></a>
+                </li>
+            <?php } ?>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item <?= $page == 'obat' ? 'active' : ''; ?>">
-                <a class="nav-link" href="<?php echo base_url('obat') ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Obat</span></a>
-            </li>
+            <?php if ($this->session->jabatan == 'admin') { ?>
+                <li class="nav-item <?= $page == 'obat' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo base_url('obat') ?>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Obat</span></a>
+                </li>
+            <?php } ?>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item <?= $page == 'transaksi' ? 'active' : ''; ?>"">
@@ -82,9 +88,11 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu Transaksi:</h6>
                         <a class="collapse-item" href="<?php echo base_url('pendaftaran') ?>">Pendaftaran</a>
-                        <a class="collapse-item" href="<?php echo base_url('pemeriksaan') ?>">Pemeriksaan</a>
-                        <a class="collapse-item" href="<?php echo base_url('tindakan') ?>">Tindakan</a>
-                        <a class="collapse-item" href="<?php echo base_url('pembayaran') ?>">Pembayaran</a>
+                        <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
+                            <a class="collapse-item" href="<?php echo base_url('pemeriksaan') ?>">Pemeriksaan</a>
+                            <a class="collapse-item" href="<?php echo base_url('tindakan') ?>">Tindakan</a>
+                            <a class="collapse-item" href="<?php echo base_url('pembayaran') ?>">Pembayaran</a>
+                        <?php } ?>
                     </div>
                 </div>
             </li>
@@ -184,14 +192,19 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    <?= isset($this->session->nama_user) ? $this->session->nama_user : 'Admin'; ?>
-                                </span>
+                                <div class="d-lg-inline d-none">
+                                    <span class="text-dark large">
+                                        <?= $this->session->nama_user ?? 'Admin'; ?>
+                                    </span> -
+                                    <span class="mr-2 text-gray-600 large">
+                                        <?= str_replace("_", " ", ucwords($this->session->jabatan ?? 'Admin', "_")); ?>
+                                    </span>
+                                </div>
                                 <img class="img-profile rounded-circle" src="<?= base_url('assets/'); ?>img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <!-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -203,7 +216,7 @@
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a>
-                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-divider"></div> -->
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -230,12 +243,12 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modalLogout">Ready to Leave?</h5>
+                                <h5 class="modal-title" id="modalLogout">Logout Akun?</h5>
                                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                            <div class="modal-body">Anda akan diarahkan ke halaman login setelah mengklik tombol Logout</div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                                 <a class="btn btn-primary" href="<?= base_url('auth/logout'); ?>">Logout</a>

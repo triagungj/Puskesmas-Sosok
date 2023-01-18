@@ -6,6 +6,10 @@ class Model_dokter extends CI_Model
     {
         return $this->db->count_all($this->table);
     }
+    public function get_all_data()
+    {
+        return $this->db->get($this->table);
+    }
     public function tampil_data($per_page, $offset)
     {
         $this->db->select('*');
@@ -36,6 +40,10 @@ class Model_dokter extends CI_Model
     }
     public function delete_data($data)
     {
-        $this->db->delete($this->table, $data);
+        if ($this->db->delete($this->table, $data)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

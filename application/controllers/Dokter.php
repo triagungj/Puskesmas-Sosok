@@ -102,7 +102,14 @@ class Dokter extends CI_Controller
     {
         $id_user = $this->input->post('id_user');
         $data = array('id_user' => $id_user);
-        $this->model_user->delete_data($data);
+        
+        if ($this->model_user->delete_data($data)) {
+            $this->session->set_flashdata('message_success', 'Berhasil menghapus data');
+        } else {
+            $error =  $this->db->error();
+            $this->session->set_flashdata('message_failure', $error['message']);
+        }
+
         redirect(base_url('dokter'));
     }
 }

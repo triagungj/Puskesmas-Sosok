@@ -7,7 +7,12 @@ class Auth extends CI_Controller
         if (isset($this->session->id_user)) {
             redirect(base_url('dashboard'));
         } else {
-            $this->load->view('auth/login_view');
+            $data['message_success'] = $this->session->flashdata('message_success');
+            $data['message_failure'] = $this->session->flashdata('message_failure');
+
+            $data['username'] = $this->session->flashdata('username');
+
+            $this->load->view('auth/login_view', $data);
         }
     }
     public function login()
@@ -24,10 +29,12 @@ class Auth extends CI_Controller
         $data_user = $this->model_user->login($data)->row();
         if ($status == 1) {
             $_SESSION["id_user"] = $data_user->id_user;
-            $_SESSION["nama"] = $data_user->nama;
+            $_SESSION["nama_user"] = $data_user->nama;
             $_SESSION["jabatan"] = $data_user->jabatan;
             redirect(base_url('dashboard'));
         } else {
+            $this->session->set_flashdata('username', $username);
+            $this->session->set_flashdata('message_failure', 'Username/Password anda salah');
             redirect(base_url());
         }
     }
