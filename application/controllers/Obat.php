@@ -45,8 +45,13 @@ class Obat extends CI_Controller
         if ($this->model_obat->input_data($data)) {
             $this->session->set_flashdata('message_success', 'Berhasil menambahkan data');
         } else {
-            $error =  $this->db->error();
-            $this->session->set_flashdata('message_failure', $error['message']);
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
         };
         redirect(base_url('obat'));
     }
@@ -70,8 +75,13 @@ class Obat extends CI_Controller
         if ($this->model_obat->edit_obat($data, $id_obat)) {
             $this->session->set_flashdata('message_success', 'Berhasil mengupdate data');
         } else {
-            $error =  $this->db->error();
-            $this->session->set_flashdata('message_failure', $error['message']);
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
         };
         redirect(base_url('obat'));
     }
@@ -84,8 +94,13 @@ class Obat extends CI_Controller
         if ($this->model_obat->delete_data($data)) {
             $this->session->set_flashdata('message_success', 'Berhasil menghapus data');
         } else {
-            $error =  $this->db->error();
-            $this->session->set_flashdata('message_failure', $error['message']);
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
         }
         redirect(base_url('obat'));
     }

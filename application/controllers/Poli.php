@@ -37,8 +37,13 @@ class Poli extends CI_Controller
         if ($this->model_poli->input_data($data)) {
             $this->session->set_flashdata('message_success', 'Berhasil menambahkan data');
         } else {
-            $error =  $this->db->error();
-            $this->session->set_flashdata('message_failure', $error['message']);
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
         };
         redirect(base_url('poli'));
     }
@@ -56,8 +61,13 @@ class Poli extends CI_Controller
         if ($this->model_poli->edit_poli($data, $id_poli)) {
             $this->session->set_flashdata('message_success', 'Berhasil mengupdate data');
         } else {
-            $error =  $this->db->error();
-            $this->session->set_flashdata('message_failure', $error['message']);
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
         };
         redirect(base_url('poli'));
     }
@@ -70,8 +80,13 @@ class Poli extends CI_Controller
         if ($this->model_poli->delete_data($data)) {
             $this->session->set_flashdata('message_success', 'Berhasil menghapus data');
         } else {
-            $error =  $this->db->error();
-            $this->session->set_flashdata('message_failure', $error['message']);
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
         }
 
         redirect(base_url('poli'));

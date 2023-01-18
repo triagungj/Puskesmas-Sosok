@@ -53,8 +53,13 @@ class Dokter extends CI_Controller
         if ($this->model_dokter->input_data($dataUser, $dataDokter)) {
             $this->session->set_flashdata('message_success', 'Berhasil menambahkan data');
         } else {
-            $error =  $this->db->error();
-            $this->session->set_flashdata('message_failure', $error['message']);
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
         };
         redirect(base_url('dokter'));
     }
@@ -92,8 +97,13 @@ class Dokter extends CI_Controller
         if ($this->model_dokter->edit_dokter($dataUser, $dataDokter, $id_dokter)) {
             $this->session->set_flashdata('message_success', 'Berhasil mengupdate data');
         } else {
-            $error =  $this->db->error();
-            $this->session->set_flashdata('message_failure', $error['message']);
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
         };
         redirect(base_url('dokter'));
     }
@@ -102,12 +112,17 @@ class Dokter extends CI_Controller
     {
         $id_user = $this->input->post('id_user');
         $data = array('id_user' => $id_user);
-        
+
         if ($this->model_user->delete_data($data)) {
             $this->session->set_flashdata('message_success', 'Berhasil menghapus data');
         } else {
-            $error =  $this->db->error();
-            $this->session->set_flashdata('message_failure', $error['message']);
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
         }
 
         redirect(base_url('dokter'));

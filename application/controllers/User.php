@@ -43,8 +43,13 @@ class User extends CI_Controller
         if ($this->model_user->input_data($data)) {
             $this->session->set_flashdata('message_success', 'Berhasil menambahkan data');
         } else {
-            $error =  $this->db->error();
-            $this->session->set_flashdata('message_failure', $error['message']);
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
         };
         redirect(base_url('user'));
     }
@@ -77,8 +82,13 @@ class User extends CI_Controller
             }
             $this->session->set_flashdata('message_success', 'Berhasil mengupdate data');
         } else {
-            $error =  $this->db->error();
-            $this->session->set_flashdata('message_failure', $error['message']);
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
         };
         redirect(base_url('user'));
     }
@@ -91,7 +101,11 @@ class User extends CI_Controller
         if ($this->model_user->delete_data($data)) {
             $this->session->set_flashdata('message_success', 'Berhasil menghapus data');
         } else {
-            $error =  $this->db->error();
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $error =  $this->db->error();
+            }
             $this->session->set_flashdata('message_failure', $error['message']);
         }
 
