@@ -9,10 +9,10 @@
                     <th>NO</th>
                     <th>NAMA OBAT</th>
                     <th>JENIS OBAT</th>
-                    <th>STOK</th>
-                    <th>SATUAN</th>
                     <th>HARGA</th>
-                    <th colspan="2">AKSI</th>
+                    <th>SATUAN</th>
+                    <th>STOK</th>
+                    <th colspan="3">AKSI</th>
                 </tr>
                 <?php
                 $no = $offset_index + 1;
@@ -21,10 +21,15 @@
                         <th><?= $no++ ?></th>
                         <td><?= $obat->nama_obat ?></td>
                         <td><?= $obat->jenis_obat ?></td>
-                        <td><?= $obat->stok ?></td>
-                        <td><?= $obat->satuan ?></td>
                         <td>Rp. <?= $obat->harga ?></td>
-
+                        <td><?= $obat->satuan ?></td>
+                        <td><?= $obat->stok ?></td>
+                        <td class="text-center">
+                            <button onclick="showTambahStokModal('<?= $obat->id_obat; ?>', 
+                            '<?= $obat->nama_obat; ?>', '<?= $obat->stok; ?>', 
+                            '<?= $obat->satuan; ?>')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambah_stok_obat">
+                                <i class="fas fa-plus"></i></button>
+                        </td>
                         <td class="text-center">
                             <button onclick="showEditModal('<?= $obat->id_obat; ?>', 
                             '<?= $obat->nama_obat; ?>', '<?= $obat->jenis_obat; ?>', 
@@ -62,7 +67,11 @@
 
 </div>
 <!-- /.container-fluid -->
-
+<div class="modal fade" id="tambah_stok_obat" tabindex="-1" role="dialog" aria-hidden="true">
+    <?php
+    $this->load->view('master/obat/form_tambah_stok_obat');
+    ?>
+</div>
 <div class="modal fade" id="tambah_obat" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
     <?php
     $this->load->view('master/obat/form_tambah_obat');

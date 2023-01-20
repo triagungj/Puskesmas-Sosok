@@ -14,7 +14,7 @@ class Model_user extends CI_Model
     }
     public function tampil_data($per_page, $offset)
     {
-        $sql = "SELECT * FROM $this->table WHERE jabatan != 'dokter' LIMIT $per_page OFFSET $offset";
+        $sql = "SELECT * FROM $this->table WHERE jabatan != 'dokter' ORDER BY id_user DESC LIMIT $per_page OFFSET $offset";
         return $this->db->query($sql);
     }
     public function input_data($data)

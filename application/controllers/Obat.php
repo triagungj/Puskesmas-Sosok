@@ -55,6 +55,31 @@ class Obat extends CI_Controller
         };
         redirect(base_url('obat'));
     }
+    public function tambah_stok_obat()
+    {
+        $id_obat = $this->input->post('id_obat');
+        $stok = $this->input->post('stok');
+        $stok_input = $this->input->post('stok_input');
+
+        $total_stok = $stok + $stok_input;
+
+        $data = array(
+            'stok' => $total_stok,
+        );
+
+        if ($this->model_obat->edit_obat($data, $id_obat)) {
+            $this->session->set_flashdata('message_success', 'Berhasil mengupdate data');
+        } else {
+            if (ENVIRONMENT == 'production') {
+                $error =  "Gagal memproses data. Coba lagi.";
+            } else {
+                $dbError =  $this->db->error();
+                $error =  $dbError['message'];
+            }
+            $this->session->set_flashdata('message_failure', $error);
+        };
+        redirect(base_url('obat'));
+    }
     public function edit_obat()
     {
         $id_obat = $this->input->post('id_obat');

@@ -8,9 +8,16 @@ class Model_pasien extends CI_Model
         $sql = "SELECT * FROM $this->table";
         return $this->db->query($sql)->num_rows();
     }
+    public function get_all_data()
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->order_by('nama_pasien', 'ASC');
+        return $this->db->get();
+    }
     public function tampil_data($per_page, $offset)
     {
-        $sql = "SELECT * FROM $this->table LIMIT $per_page OFFSET $offset";
+        $sql = "SELECT * FROM $this->table ORDER BY id_pasien DESC LIMIT $per_page OFFSET $offset";
         return $this->db->query($sql);
     }
     public function input_data($data)

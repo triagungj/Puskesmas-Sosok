@@ -96,6 +96,13 @@
                     </div>
                 </div>
             </li>
+            <?php if ($this->session->jabatan != 'dokter') { ?>
+                <li class="nav-item <?= $page == 'laporan' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo base_url('laporan') ?>">
+                        <i class="fas fa-fw fa-newspaper"></i>
+                        <span>Laporan</span></a>
+                </li>
+            <?php } ?>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

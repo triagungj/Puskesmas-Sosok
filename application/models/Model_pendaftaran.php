@@ -1,27 +1,24 @@
 <?php
-class Model_dokter_poli extends CI_Model
+class Model_pendaftaran extends CI_model
 {
-    protected $table = 'dokter_poli';
+    protected $table = 'pendaftaran';
     public function count()
     {
         return $this->db->count_all($this->table);
     }
     public function get_all_data()
     {
-        $this->db->select('*');
-        $this->db->from($this->table);
-        $this->db->join('dokter', 'dokter_poli.id_dokter = dokter.id_dokter');
-        $this->db->join('poli', 'dokter_poli.id_poli = poli.id_poli');
-        $this->db->order_by('nama_poli', 'ASC');
-        return $this->db->get();
+        return $this->db->get($this->table);
     }
     public function tampil_data($per_page, $offset)
     {
         $this->db->select('*');
         $this->db->from($this->table);
+        $this->db->join('pasien', 'pendaftaran.id_pasien = pasien.id_pasien');
+        $this->db->join('dokter_poli', 'pendaftaran.id_dokter_poli = dokter_poli.id_dokter_poli');
         $this->db->join('dokter', 'dokter_poli.id_dokter = dokter.id_dokter');
         $this->db->join('poli', 'dokter_poli.id_poli = poli.id_poli');
-        $this->db->order_by('id_dokter_poli', 'DESC');
+        $this->db->order_by('id_pendaftaran', 'DESC');
         $this->db->limit($offset, $per_page);
         return $this->db->get();
     }
@@ -33,9 +30,9 @@ class Model_dokter_poli extends CI_Model
             return false;
         }
     }
-    public function edit_dokter_poli($data, $id)
+    public function edit_pendaftaran($data, $id)
     {
-        if ($this->db->update($this->table, $data, array('id_dokter_poli' => $id))) {
+        if ($this->db->update($this->table, $data, array('id_pendaftaran' => $id))) {
             return true;
         } else {
             return false;

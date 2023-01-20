@@ -8,13 +8,17 @@ class Model_dokter extends CI_Model
     }
     public function get_all_data()
     {
-        return $this->db->get($this->table);
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->order_by('id_dokter', 'DESC');
+        return $this->db->get();
     }
     public function tampil_data($per_page, $offset)
     {
         $this->db->select('*');
         $this->db->from($this->table);
         $this->db->join('user', 'dokter.id_user = user.id_user');
+        $this->db->order_by('id_dokter', 'DESC');
         $this->db->limit($offset, $per_page);
         return $this->db->get();
     }
