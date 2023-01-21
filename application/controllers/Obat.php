@@ -15,7 +15,7 @@ class Obat extends CI_Controller
         $data['offset_index'] = $offset;
         $data['total_page'] = $total_page;
 
-        $data['page'] = 'obat';
+        $data['page'] = 'master';
         $data['title'] = 'Data Obat';
         $data['message_success'] = $this->session->flashdata('message_success');
         $data['message_failure'] = $this->session->flashdata('message_failure');

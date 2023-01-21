@@ -3,7 +3,7 @@ class Tindakan extends CI_Controller
 {
     public function index()
     {
-        $data['page'] = 'transaksi';
+        $data['page'] = 'tindakan';
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('master/tindakan/list_tindakan_view');

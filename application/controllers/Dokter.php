@@ -15,7 +15,7 @@ class Dokter extends CI_Controller
         $data['offset_index'] = $offset;
         $data['total_page'] = $total_page;
 
-        $data['page'] = 'dokter';
+        $data['page'] = 'master';
         $data['title'] = 'Data Dokter';
         $data['message_success'] = $this->session->flashdata('message_success');
         $data['message_failure'] = $this->session->flashdata('message_failure');

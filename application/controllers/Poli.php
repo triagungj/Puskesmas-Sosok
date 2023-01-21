@@ -15,7 +15,7 @@ class Poli extends CI_Controller
         $data['offset_index'] = $offset;
         $data['total_page'] = $total_page;
 
-        $data['page'] = 'poli';
+        $data['page'] = 'master';
         $data['title'] = 'Data Poli';
         $data['message_success'] = $this->session->flashdata('message_success');
         $data['message_failure'] = $this->session->flashdata('message_failure');

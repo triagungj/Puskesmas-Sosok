@@ -3,7 +3,7 @@ class Pembayaran extends CI_Controller
 {
     public function index()
     {
-        $data['page'] = 'transaksi';
+        $data['page'] = 'pembayaran';
         $data['title'] = 'Data Pembayaran';
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

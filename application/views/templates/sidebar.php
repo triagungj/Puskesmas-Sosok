@@ -24,44 +24,41 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Data Master
+            </div>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item <?= $page == 'master' ? 'active' : ''; ?>"">
+                 <a class=" nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Data Master</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Menu Data Master:</h6>
+                        <?php if ($this->session->jabatan != 'dokter') { ?>
+                            <a class="collapse-item" href="<?php echo base_url('user') ?>">User</a>
+                        <?php } ?>
+                        <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
+                            <a class="collapse-item" href="<?php echo base_url('dokter') ?>">Dokter</a>
+                        <?php } ?>
+                        <?php if ($this->session->jabatan == 'admin') { ?>
+                            <a class="collapse-item" href="<?php echo base_url('poli') ?>">Poli</a>
+                        <?php } ?>
+                        <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
+                            <a class="collapse-item" href="<?php echo base_url('dokter_poli') ?>">Dokter Poli</a>
+                        <?php } ?>
+                        <?php if ($this->session->jabatan == 'admin') { ?>
+                            <a class="collapse-item" href="<?php echo base_url('obat') ?>">Obat</a>
+                        <?php } ?>
 
+                    </div>
+                </div>
+            </li>
             <!-- Heading -->
             <div class="sidebar-heading">
-                Master Data
+                Transaksi
             </div>
-
-            <?php if ($this->session->jabatan != 'dokter') { ?>
-                <li class="nav-item <?= $page == 'user' ? 'active' : ''; ?>">
-                    <a class="nav-link" href="<?php echo base_url('user') ?>">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>User</span></a>
-                </li>
-            <?php } ?>
-
-            <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
-                <li class="nav-item <?= $page == 'dokter' ? 'active' : ''; ?>">
-                    <a class="nav-link" href="<?php echo base_url('dokter') ?>">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Dokter</span></a>
-                </li>
-            <?php } ?>
-
-            <?php if ($this->session->jabatan == 'admin') { ?>
-                <li class="nav-item <?= $page == 'poli' ? 'active' : ''; ?>">
-                    <a class=" nav-link" href="<?php echo base_url('poli') ?>">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Poli</span></a>
-                </li>
-            <?php } ?>
-
-            <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
-                <li class="nav-item <?= $page == 'dokter_poli' ? 'active' : ''; ?>">
-                    <a class="nav-link" href="<?php echo base_url('dokter_poli') ?>">
-                        <i class=" fas fa-fw fa-chart-area"></i>
-                        <span>Dokter Poli</span></a>
-                </li>
-            <?php } ?>
-
             <?php if ($this->session->jabatan != 'dokter') { ?>
                 <li class="nav-item <?= $page == 'pasien' ? 'active' : ''; ?>">
                     <a class="nav-link" href="<?php echo base_url('pasien') ?>">
@@ -70,32 +67,31 @@
                 </li>
             <?php } ?>
 
-            <?php if ($this->session->jabatan == 'admin') { ?>
-                <li class="nav-item <?= $page == 'obat' ? 'active' : ''; ?>">
-                    <a class="nav-link" href="<?php echo base_url('obat') ?>">
+            <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
+                <li class="nav-item <?= $page == 'pendaftaran' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo base_url('pendaftaran') ?>">
                         <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Obat</span></a>
+                        <span>Pendaftaran</span></a>
+                </li>
+            <?php } ?>
+            <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
+                <li class="nav-item <?= $page == 'pemeriksaan' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo base_url('pemeriksaan') ?>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Pemeriksaan</span></a>
+                </li>
+                <li class="nav-item <?= $page == 'tindakan' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo base_url('tindakan') ?>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Tindakan</span></a>
+                </li>
+                <li class="nav-item <?= $page == 'pembayaran' ? 'active' : ''; ?>">
+                    <a class="nav-link" href="<?php echo base_url('pembayaran') ?>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Pembayaran</span></a>
                 </li>
             <?php } ?>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item <?= $page == 'transaksi' ? 'active' : ''; ?>"">
-                 <a class=" nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Transaksi</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Menu Transaksi:</h6>
-                        <a class="collapse-item" href="<?php echo base_url('pendaftaran') ?>">Pendaftaran</a>
-                        <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
-                            <a class="collapse-item" href="<?php echo base_url('pemeriksaan') ?>">Pemeriksaan</a>
-                            <a class="collapse-item" href="<?php echo base_url('tindakan') ?>">Tindakan</a>
-                            <a class="collapse-item" href="<?php echo base_url('pembayaran') ?>">Pembayaran</a>
-                        <?php } ?>
-                    </div>
-                </div>
-            </li>
             <?php if ($this->session->jabatan != 'dokter') { ?>
                 <li class="nav-item <?= $page == 'laporan' ? 'active' : ''; ?>">
                     <a class="nav-link" href="<?php echo base_url('laporan') ?>">

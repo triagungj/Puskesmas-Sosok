@@ -3,7 +3,7 @@ class Pemeriksaan extends CI_Controller
 {
     public function index()
     {
-        $data['page'] = 'transaksi';
+        $data['page'] = 'pemeriksaan';
         $data['title'] = 'Data Pemeriksaan';
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

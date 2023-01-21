@@ -19,7 +19,7 @@ class Pendaftaran extends CI_Controller
         $data['offset_index'] = $offset;
         $data['total_page'] = $total_page;
 
-        $data['page'] = 'transaksi';
+        $data['page'] = 'pendaftaran';
         $data['title'] = 'Data Pendaftaran';
         $data['message_success'] = $this->session->flashdata('message_success');
         $data['message_failure'] = $this->session->flashdata('message_failure');
