@@ -20,7 +20,7 @@
                 </div>
                 <div class="mb-3 text-input form-group">
                     <label for="inputKeluhanEdit" class="text-dark">Keluhan Pasien</label>
-                    <textarea required name="keluhan" type="text" class="form-control" id="inputKeluhanEdit" placeholder="Keluhan"></textarea>
+                    <textarea required name="keluhan" type="text" class="form-control" id="inputKeluhanEdit" placeholder="Keluhan" rows="5"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -45,7 +45,7 @@
     function showEditModal(id_pendaftaran, id_pasien, keluhan, id_dokter_poli) {
         document.getElementById("idPendaftaranEdit").value = id_pendaftaran;
         document.getElementById("selectIdPasienEdit").value = id_pasien;
-        document.getElementById("inputKeluhanEdit").value = keluhan;
+        document.getElementById("inputKeluhanEdit").value = keluhan.replace(/<br\s?\/?>/g, "\n");;
         document.getElementById("selectIdDokterPoliEdit").value = id_dokter_poli;
     }
 </script>

@@ -10,7 +10,7 @@
                     <th>NO RM</th>
                     <th>PASIEN</th>
                     <th width="20%">KELUHAN</th>
-                    <th width="30%">KETERANGAN</th>
+                    <th width="20%">KETERANGAN</th>
                     <th>DOKTER POLI</th>
                     <th>TANGGAL</th>
                     <th colspan="2">AKSI</th>

@@ -33,7 +33,7 @@
 <script>
     function showEditModal(no_rm, nama_pasien, nik, nama_poli, nama_dokter, keterangan) {
         document.getElementById("inputNoRmEdit").value = no_rm;
-        document.getElementById("inputKeteranganEdit").innerHTML = keterangan.replace(/<br\s?\/?>/g, "\n");;
+        document.getElementById("inputKeteranganEdit").innerHTML = keterangan.replace(/<br\s?\/?>/g, "\n");
         document.getElementById("inputPendaftaranEdit").value = nama_pasien + ' - ' + nik + ' - ' + nama_poli + ' - ' + nama_dokter;
     }
 </script>
