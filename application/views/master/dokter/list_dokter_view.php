@@ -46,8 +46,12 @@
                 <i class="fas fa-edit"></i></button>
             </td>
             <td class="text-center">
-              <button onclick="showDeleteModal('<?= $dokter->id_user ?>', '<?= $dokter->nama_dokter; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_user">
-                <i class="fas fa-trash"></i></button>
+              <?php if ($this->session->id_user != $dokter->id_user) { ?>
+
+                <button onclick="showDeleteModal('<?= $dokter->id_user ?>', '<?= $dokter->nama_dokter; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_user">
+                  <i class="fas fa-trash"></i>
+                </button>
+              <?php } ?>
             </td>
 
           </tr>

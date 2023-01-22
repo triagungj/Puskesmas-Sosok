@@ -19,7 +19,7 @@
                 </div>
                 <div class="mb-3 text-input form-group">
                     <label for="inputKeluhan" class="text-dark">Keluhan Pasien</label>
-                    <input required name="keluhan" type="text" class="form-control" id="inputKeluhan" placeholder="Keluhan" />
+                    <textarea required name="keluhan" type="text" class="form-control" id="inputKeluhan" placeholder="Keluhan"></textarea>
                 </div>
 
                 <div class="form-group">

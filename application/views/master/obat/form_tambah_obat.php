@@ -18,7 +18,7 @@
                 </div>
                 <div class="mb-3 text-input form-group">
                     <label for="inputStok" class="text-dark">Stok Obat</label>
-                    <input required name="stok" type="number" class="form-control" id="inputStok" placeholder="Stok Obat" />
+                    <input required name="stok" type="number" class="form-control" id="inputStok" placeholder="Stok Obat" min="0" />
                 </div>
                 <div class="mb-3 text-input form-group">
                     <label for="inputSatuan" class="text-dark">Satuan</label>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="mb-3 text-input form-group">
                     <label for="inputHarga" class="text-dark">Harga (Rupiah)</label>
-                    <input required name="harga" type="number" class="form-control" id="inputHarga" placeholder="Harga Obat" />
+                    <input required name="harga" type="number" class="form-control" id="inputHarga" placeholder="Harga Obat" min="0" />
                 </div>
             </div>
             <div class="modal-footer">

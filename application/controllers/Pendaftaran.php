@@ -32,7 +32,8 @@ class Pendaftaran extends CI_Controller
 
     public function tambah_pendaftaran()
     {
-        $keluhan = $this->input->post('keluhan');
+        $keluhan = preg_replace("/[\n\r]/", "<br />", $this->input->post('keluhan'));
+        $keluhan = str_replace("<br /><br />", "<br />", $keluhan);
         $tgl_pendaftaran = date("Y-m-d H:i:s");
         $id_pasien = $this->input->post('id_pasien');
         $id_dokter_poli = $this->input->post('id_dokter_poli');
@@ -60,7 +61,8 @@ class Pendaftaran extends CI_Controller
     public function edit_pendaftaran()
     {
         $id_pendaftaran = $this->input->post('id_pendaftaran');
-        $keluhan = $this->input->post('keluhan');
+        $keluhan = preg_replace("/[\n\r]/", "<br />", $this->input->post('keluhan'));
+        $keluhan = str_replace("<br /><br />", "<br />", $keluhan);
         $id_dokter_poli = $this->input->post('id_dokter_poli');
 
         $data = array(

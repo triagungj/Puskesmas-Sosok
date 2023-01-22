@@ -14,7 +14,7 @@
                 </div>
                 <div class="mb-3 text-input form-group">
                     <label for="inputNik" class="text-dark">NIK Pasien</label>
-                    <input required name="nik" type="text" class="form-control" id="inputNik" placeholder="NIK Pasien" />
+                    <input required name="nik" type="text" class="form-control" id="inputNik" placeholder="NIK Pasien" minlength="16" maxlength="16" />
                 </div>
                 <div class="form-group">
                     <label for="selectJenisKelamin">Jenis Kelamin</label>

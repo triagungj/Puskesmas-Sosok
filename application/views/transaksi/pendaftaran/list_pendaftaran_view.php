@@ -8,7 +8,7 @@
                     <th>NAMA PASIEN</th>
                     <th>NIK</th>
                     <th>ALAMAT</th>
-                    <th>KELUHAN</th>
+                    <th width="20%">KELUHAN</th>
                     <th>DOKTER POLI</th>
                     <th>TANGGAL DAFTAR</th>
                     <th>PRINT</th>
@@ -24,7 +24,7 @@
                         <td><?= $pendaftaran->nik ?></td>
                         <td><?= $pendaftaran->alamat ?></td>
                         <td><?= $pendaftaran->keluhan ?></td>
-                        <td><?= $pendaftaran->nama_poli . ' - ' . $pendaftaran->nama_dokter ?> - Spesialisasi <?= $pendaftaran->spesialisasi; ?></td>
+                        <td><?= $pendaftaran->nama_poli . ' - ' . $pendaftaran->nama_dokter ?> (<?= $pendaftaran->spesialisasi; ?>)</td>
                         <td><?= $pendaftaran->tgl_pendaftaran ?></td>
                         <td class="text-center">
                             <button onclick="showDeleteModal('<?= $pendaftaran->id_pendaftaran ?>', '<?= $pendaftaran->nama_poli; ?>', '<?= $pendaftaran->nama_dokter; ?>')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#hapus_pendaftaran">
