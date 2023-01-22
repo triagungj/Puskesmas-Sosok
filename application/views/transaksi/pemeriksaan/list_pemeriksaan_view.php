@@ -1,5 +1,7 @@
 <div class="container-fluid">
-    <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="#tambah_pemeriksaan"><i class="fas fa-plus fa-sm"></i> Tambah Pemeriksaan</button>
+    <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="<?= $list_pendaftaran != null ? "#tambah_pemeriksaan" : "#empty_dialog"  ?>">
+        <i class="fas fa-plus fa-sm"></i> Tambah Pemeriksaan
+    </button>
     <div class="table-custom-wrapper">
         <?php if ($pemeriksaan != null) { ?>
             <table class="table table-bordered table-custom">
@@ -60,6 +62,14 @@
     </div>
     <div style="height: 50px;"></div>
 
+</div>
+
+<div class="modal fade" id="empty_dialog" tabindex="-1" role="dialog" aria-hidden="true">
+    <?php
+    $empty_data['empty_title'] = 'Perhatian';
+    $empty_data['empty_desc'] = 'Gagal menambah data pemeriksaan karena belum ada data pendaftaran baru. Harap <b>tambahkan data pendaftaran</b> terlebih dahulu untuk melanjutkan pemeriksaan';
+    $this->load->view('templates/empty_dialog', $empty_data);
+    ?>
 </div>
 
 <div class="modal fade" id="tambah_pemeriksaan" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
