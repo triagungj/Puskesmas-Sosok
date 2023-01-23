@@ -37,8 +37,11 @@ class Pembayaran extends CI_Controller
             'status' => 'Lunas',
             'tgl_pembayaran' => $tgl_pembayaran
         );
+        $data_edit = array(
+            'id_pembayaran' => $id_pembayaran
+        );
 
-        if ($this->model_pembayaran->edit_pembayaran($data, $id_pembayaran)) {
+        if ($this->model_pembayaran->edit_pembayaran($data, $data_edit)) {
             $this->session->set_flashdata('message_success', 'Berhasil mengupdate data');
         } else {
             if (ENVIRONMENT == 'production') {

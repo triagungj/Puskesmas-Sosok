@@ -8,10 +8,10 @@
                     <th>PASIEN</th>
                     <th>DOKTER POLI</th>
                     <th>TOTAL BAYAR</th>
-                    <th>STATUS</th>
                     <th>TANGGAL BAYAR</th>
-                    <th>PRINT</th>
+                    <th>STATUS</th>
                     <th>AKSI</th>
+                    <th>PRINT</th>
                 </tr>
                 <?php
                 $no = $offset_index + 1;
@@ -22,25 +22,24 @@
                         <td><?= $pembayaran->nama_pasien ?></td>
                         <td><?= $pembayaran->nama_poli; ?> (<?= $pembayaran->nama_dokter ?>)</td>
                         <td>Rp. <?= $pembayaran->total_pembayaran; ?>,00</td>
-                        <td><?= $pembayaran->status ?></td>
                         <td class="text-center"><?= $pembayaran->tgl_pembayaran ?? '-' ?></td>
-                        <td class="text-center">
-                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_pendaftaran">
-                                <i class="fas fa-print"></i></button>
-                        </td>
+                        <td><?= $pembayaran->status ?></td>
                         <td class="text-center">
                             <?php if ($pembayaran->status == "Belum Lunas") { ?>
                                 <input hidden name="id_pembayaran" type="text" value="<?= $pembayaran->id_pembayaran; ?>">
                                 <button onclick="showProsesBayarModal('<?= $pembayaran->id_pembayaran; ?>', '<?= $pembayaran->no_rm; ?>', 
                                 '<?= $pembayaran->nama_pasien; ?>', '<?= $pembayaran->nama_poli; ?>', 
                                 '<?= $pembayaran->nama_dokter; ?>')" type="submit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#proses_bayar">
-                                    <i class="fas fa-check"></i></button>
+                                    PROSES BAYAR</button>
                             <?php } else { ?>
-                                <button onclick="showBatalBayarModal('<?= $pembayaran->id_pembayaran; ?>', '<?= $pembayaran->no_rm; ?>', 
-                                '<?= $pembayaran->nama_pasien; ?>', '<?= $pembayaran->nama_poli; ?>', 
-                                '<?= $pembayaran->nama_dokter; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#batalkan_bayar">
-                                    <i class="fas fa-undo"></i></button>
+                                <button disabled class="btn btn-success btn-sm">
+                                    <i class="fas fa-check"></i>
+                                </button>
                             <?php } ?>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_pendaftaran">
+                                <i class="fas fa-print"></i></button>
                         </td>
                     </tr>
                 <?php endforeach; ?>

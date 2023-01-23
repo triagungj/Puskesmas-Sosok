@@ -51,8 +51,8 @@ class Tindakan extends CI_Controller
 
         $id_tindakan = $this->model_tindakan->input_data($data);
         if ($id_tindakan != null) {
+            $total_pembayaran = +$jumlah_biaya;
             if ($id_obat != null) {
-                $total_pembayaran = +$jumlah_biaya;
                 $list_data_obat = array();
                 for ($i = 0; $i < sizeof($id_obat); $i++) {
                     $obat_selected = $this->model_obat->select_data($id_obat[$i]);
@@ -80,24 +80,23 @@ class Tindakan extends CI_Controller
                     }
                     $this->session->set_flashdata('message_failure', $error);
                 }
+            }
+            $data_pembayaran = array(
+                'total_pembayaran' => $total_pembayaran,
+                'status' => "Belum Lunas",
+                'id_tindakan' => $id_tindakan
+            );
 
-                $data_pembayaran = array(
-                    'total_pembayaran' => $total_pembayaran,
-                    'status' => "Belum Lunas",
-                    'id_tindakan' => $id_tindakan
-                );
-
-                if ($this->model_pembayaran->input_data($data_pembayaran)) {
-                    $this->session->set_flashdata('message_success', 'Berhasil menambahkan data');
+            if ($this->model_pembayaran->input_data($data_pembayaran)) {
+                $this->session->set_flashdata('message_success', 'Berhasil menambahkan data');
+            } else {
+                if (ENVIRONMENT == 'production') {
+                    $error =  "Gagal memproses data. Coba lagi.";
                 } else {
-                    if (ENVIRONMENT == 'production') {
-                        $error =  "Gagal memproses data. Coba lagi.";
-                    } else {
-                        $dbError =  $this->db->error();
-                        $error =  $dbError['message'];
-                    }
-                    $this->session->set_flashdata('message_failure', $error);
+                    $dbError =  $this->db->error();
+                    $error =  $dbError['message'];
                 }
+                $this->session->set_flashdata('message_failure', $error);
             }
         } else {
             if (ENVIRONMENT == 'production') {
@@ -110,18 +109,64 @@ class Tindakan extends CI_Controller
         };
         redirect(base_url('tindakan'));
     }
-    public function edit_pemeriksaan()
+    public function edit_tindakan()
     {
-        $no_rm = $this->input->post('no_rm');
-        $keterangan = preg_replace("/[\n\r]/", "<br />",  $this->input->post('keterangan'));
-        $keterangan = str_replace("<br /><br />", "<br />", $keterangan);
+        $id_tindakan = $this->input->post('id_tindakan');
+        $nama_tindakan = $this->input->post('nama_tindakan');
+        $jumlah_biaya = $this->input->post('jumlah_biaya');
+        $id_obat = $this->input->post('id_obat');
+        $jumlah_obat = $this->input->post('jumlah_obat');
 
         $data = array(
-            'keterangan' => $keterangan
+            'nama_tindakan' => $nama_tindakan,
+            'jumlah_biaya' => $jumlah_biaya,
         );
 
-        if ($this->model_tindakan->edit_pemeriksaan($data, $no_rm)) {
-            $this->session->set_flashdata('message_success', 'Berhasil mengupdate data');
+        if ($this->model_tindakan->edit_tindakan($data, $id_tindakan)) {
+            $total_pembayaran = +$jumlah_biaya;
+            $id_tindakan_arr = array('id_tindakan' => $id_tindakan);
+
+            $list_obat_tindakan = $this->model_obat_tindakan->select_data($id_tindakan)->result();
+            foreach ($list_obat_tindakan as $obat_tindakan) {
+                $stok = $obat_tindakan->stok + $obat_tindakan->jumlah_obat;
+                $data_stok = array(
+                    'stok' => $stok
+                );
+                $this->model_obat->edit_obat($data_stok, $obat_tindakan->id_obat);
+            }
+            $this->model_obat_tindakan->delete_data($id_tindakan_arr);
+
+            if ($id_obat != null) {
+                $list_data_obat = array();
+                for ($i = 0; $i < sizeof($id_obat); $i++) {
+                    $obat_selected = $this->model_obat->select_data($id_obat[$i]);
+
+                    $total_pembayaran += $obat_selected->harga * $jumlah_obat[$i];
+
+                    $data_obat = array(
+                        'id_obat' => $id_obat[$i],
+                        'jumlah_obat' => $jumlah_obat[$i],
+                        'id_tindakan' => $id_tindakan
+                    );
+                    array_push($list_data_obat, $data_obat);
+                }
+                $this->model_obat_tindakan->input_multi_data($list_data_obat);
+            }
+            $data_pembayaran = array(
+                'total_pembayaran' => $total_pembayaran
+            );
+
+            if ($this->model_pembayaran->edit_pembayaran($data_pembayaran, $id_tindakan_arr)) {
+                $this->session->set_flashdata('message_success', 'Berhasil menambahkan data');
+            } else {
+                if (ENVIRONMENT == 'production') {
+                    $error =  "Gagal memproses data. Coba lagi.";
+                } else {
+                    $dbError =  $this->db->error();
+                    $error =  $dbError['message'];
+                }
+                $this->session->set_flashdata('message_failure', $error);
+            }
         } else {
             if (ENVIRONMENT == 'production') {
                 $error =  "Gagal memproses data. Coba lagi.";
@@ -131,6 +176,7 @@ class Tindakan extends CI_Controller
             }
             $this->session->set_flashdata('message_failure', $error);
         };
+
         redirect(base_url('tindakan'));
     }
 

@@ -50,9 +50,9 @@ class Model_pembayaran extends CI_Model
             return null;
         }
     }
-    public function edit_pembayaran($data, $id)
+    public function edit_pembayaran($data, $data_edit)
     {
-        if ($this->db->update($this->table, $data, array('id_pembayaran' => $id))) {
+        if ($this->db->update($this->table, $data, $data_edit)) {
             return true;
         } else {
             return false;

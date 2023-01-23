@@ -19,6 +19,8 @@
                 <?php
                 $no = $offset_index + 1;
                 foreach ($list_tindakan as $tindakan) : ?>
+                    <?php $obat_str = json_encode($tindakan->obat);
+                    $obat_str = str_replace(chr(34), '&quot', $obat_str); ?>
                     <tr>
                         <th><?= $no++ ?></th>
                         <td><?= $tindakan->no_rm ?></td>
@@ -37,7 +39,7 @@
                         <td class="text-center">
                             <button onclick="showEditModal('<?= $tindakan->id_tindakan; ?>', '<?= $tindakan->no_rm; ?>', '<?= $tindakan->nama_pasien; ?>', 
                             '<?= $tindakan->nama_poli; ?>', '<?= $tindakan->nama_dokter; ?>', '<?= $tindakan->nama_tindakan; ?>', 
-                            '<?= $tindakan->jumlah_biaya; ?>', '')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_tindakan">
+                            '<?= $tindakan->jumlah_biaya; ?>', '<?= $obat_str ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_tindakan">
                                 <i class="fas fa-edit"></i></button>
                         </td>
                         <td class="text-center">

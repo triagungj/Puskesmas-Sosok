@@ -10,6 +10,13 @@ class Model_pendaftaran extends CI_model
     {
         return $this->db->get($this->table);
     }
+    public function select_data($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('id_pendaftaran', $id);
+        return $this->db->get()->row();
+    }
     public function tampil_data($per_page, $offset)
     {
         $this->db->select('*');

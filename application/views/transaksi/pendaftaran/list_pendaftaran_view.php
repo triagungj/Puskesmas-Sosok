@@ -27,8 +27,12 @@
                         <td><?= $pendaftaran->nama_poli . ' - ' . $pendaftaran->nama_dokter ?> (<?= $pendaftaran->spesialisasi; ?>)</td>
                         <td><?= $pendaftaran->tgl_pendaftaran ?></td>
                         <td class="text-center">
-                            <button onclick="showDeleteModal('<?= $pendaftaran->id_pendaftaran ?>', '<?= $pendaftaran->nama_poli; ?>', '<?= $pendaftaran->nama_dokter; ?>')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#hapus_pendaftaran">
-                                <i class="fas fa-print"></i></button>
+                            <form action="<?= base_url('pendaftaran/print_pendaftaran'); ?>" method="post" target="_blank">
+                                <input hidden type="text" name="id_pendaftaran" value="<?= $pendaftaran->id_pendaftaran; ?>">
+                                <button type="submit" class="btn btn-success btn-sm" data-toggle="modal" ">
+                                    <i class=" fas fa-print"></i>
+                                </button>
+                            </form>
                         </td>
                         <td class="text-center">
                             <button onclick="showEditModal('<?= $pendaftaran->id_pendaftaran; ?>', '<?= $pendaftaran->id_pasien; ?>', '<?= $pendaftaran->keluhan; ?>', '<?= $pendaftaran->id_dokter_poli; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_pendaftaran">

@@ -30,6 +30,17 @@ class Pendaftaran extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function print_pendaftaran()
+    {
+        $id_pendaftaran = $this->input->post('id_pendaftaran');
+
+        $pendaftaran = $this->model_pendaftaran->select_data($id_pendaftaran);
+
+        $data['pendaftaran'] = $pendaftaran;
+
+        $this->load->view('print/print_pendaftaran', $data);
+    }
+
     public function tambah_pendaftaran()
     {
         $keluhan = preg_replace("/[\n\r]/", "<br />", $this->input->post('keluhan'));

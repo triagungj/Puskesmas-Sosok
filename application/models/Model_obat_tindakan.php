@@ -58,9 +58,9 @@ class Model_obat_tindakan extends CI_Model
             return false;
         }
     }
-    public function edit_tindakan($data, $id)
+    public function edit_obat_tindakan($data, $data_edit)
     {
-        if ($this->db->update($this->table, $data, array('id_tindakan' => $id))) {
+        if ($this->db->update($this->table, $data, $data_edit)) {
             return true;
         } else {
             return false;

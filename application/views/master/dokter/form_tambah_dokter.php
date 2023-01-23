@@ -34,7 +34,14 @@
                 </div>
                 <div class="mb-3 text-input form-group">
                     <label for="inputSpesialisasi" class="text-dark">Spesialisasi</label>
-                    <input required name="spesialisasi" type="text" class="form-control" id="inputSpesialisasi" placeholder="Spesialisasi" />
+                    <select required name="spesialisasi" class="form-control" id="inputSpesialisasi">
+                        <option value="" hidden>-</option>
+                        <option value="Umum">Umum</option>
+                        <option value="Gizi">Gizi</option>
+                        <option value="Mata">Mata</option>
+                        <option value="Gigi">Gigi</option>
+                        <option value="KIA">KIA</option>
+                    </select>
                 </div>
             </div>
             <div class="modal-footer">

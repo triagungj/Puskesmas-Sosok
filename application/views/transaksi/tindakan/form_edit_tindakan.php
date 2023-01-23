@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <input hidden required name="id_tindakan" type="text" class="form-control" id="inputIdTindakanEdit" placeholder="NO RM" minlength="6" maxlength="6">
+                    <input hidden required name="id_tindakan" type="text" class="form-control" id="inputIdTindakanEdit">
 
                     <label for="selectIdPendaftaran" class="text-dark">Data Pemeriksaan</label>
                     <input disabled required type="text" class="form-control" id="inputNoRmEdit" placeholder="NO RM" minlength="6" maxlength="6">
@@ -26,7 +26,7 @@
                     <label class="text-dark">Obat</label>
                     <?php foreach ($list_obat as $obat) : ?>
                         <div class="form-check d-flex align-items-center mb-2" style="min-height: 40px;">
-                            <input name="id_obat[]" onclick="onChangeCheck(<?= $obat->id_obat; ?>)" value="<?= $obat->id_obat; ?>" class="form-check-input" type="checkbox" id="obatCheckEdit<?= $obat->id_obat; ?>" <?= $obat->stok == 0 ? 'disabled' : ''; ?>>
+                            <input name="id_obat[]" onclick="onChangeCheckEdit(<?= $obat->id_obat; ?>)" value="<?= $obat->id_obat; ?>" class="form-check-input" type="checkbox" id="obatCheckEdit<?= $obat->id_obat; ?>">
                             <label class="form-check-label" for="obatCheckEdit<?= $obat->id_obat; ?>">
                                 <?= $obat->nama_obat; ?> (Stok: <?= $obat->stok; ?>)
                             </label>
@@ -49,11 +49,22 @@
         document.getElementById("inputNoRmEdit").value = no_rm + ' - ' + nama_pasien + ' - ' + nama_poli + ' - ' + nama_dokter;
         document.getElementById("inputNamaTindakanEdit").value = nama_tindakan;
         document.getElementById("inputJumlahBiayaEdit").value = jumlah_biaya;
+        var obat_arr = list_obat.replace(/&quot/g, '"');
+        var data_obat = JSON.parse(obat_arr);
+
+        for (var i = 0; i < data_obat.length; i++) {
+            var obat = data_obat[i];
+            document.getElementById("obatCheckEdit" + obat.id_obat).checked = true;
+            document.getElementById("inputStokObatEdit" + obat.id_obat).hidden = false;
+            document.getElementById("inputStokObatEdit" + obat.id_obat).disabled = false;
+            document.getElementById("inputStokObatEdit" + obat.id_obat).value = obat.jumlah_obat;
+            document.getElementById("inputStokObatEdit" + obat.id_obat).max = parseInt(obat.stok) + parseInt(obat.jumlah_obat);
+        }
     }
 
-    // function onChangeCheck(id) {
-    //     var isChecked = document.getElementById("obatCheckEdit" + id).checked;
-    //     document.getElementById("inputStokObatEdit" + id).hidden = !isChecked;
-    //     document.getElementById("inputStokObatEdit" + id).disabled = !isChecked;
-    // }
+    function onChangeCheckEdit(id) {
+        var isChecked = document.getElementById("obatCheckEdit" + id).checked;
+        document.getElementById("inputStokObatEdit" + id).hidden = !isChecked;
+        document.getElementById("inputStokObatEdit" + id).disabled = !isChecked;
+    }
 </script>
