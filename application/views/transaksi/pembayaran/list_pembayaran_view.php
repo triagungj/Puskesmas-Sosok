@@ -38,8 +38,12 @@
                             <?php } ?>
                         </td>
                         <td class="text-center">
-                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_pendaftaran">
-                                <i class="fas fa-print"></i></button>
+                            <form action="<?= base_url('pembayaran/print_pembayaran'); ?>" method="post" target="_blank">
+                                <input hidden type="text" name="id_pembayaran" value="<?= $pembayaran->id_pembayaran; ?>">
+                                <button type="submit" class="btn btn-success btn-sm" data-toggle="modal" ">
+                                    <i class=" fas fa-print"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>

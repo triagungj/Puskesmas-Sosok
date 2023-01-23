@@ -14,6 +14,10 @@ class Model_pendaftaran extends CI_model
     {
         $this->db->select('*');
         $this->db->from($this->table);
+        $this->db->join('pasien', 'pendaftaran.id_pasien = pasien.id_pasien');
+        $this->db->join('dokter_poli', 'pendaftaran.id_dokter_poli = dokter_poli.id_dokter_poli');
+        $this->db->join('dokter', 'dokter_poli.id_dokter = dokter.id_dokter');
+        $this->db->join('poli', 'dokter_poli.id_poli = poli.id_poli');
         $this->db->where('id_pendaftaran', $id);
         return $this->db->get()->row();
     }

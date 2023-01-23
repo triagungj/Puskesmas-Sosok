@@ -11,6 +11,20 @@ class Model_pembayaran extends CI_Model
     {
         return $this->db->get($this->table);
     }
+    public function select_data($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->join('tindakan', 'pembayaran.id_tindakan = tindakan.id_tindakan');
+        $this->db->join('pemeriksaan', 'tindakan.no_rm = pemeriksaan.no_rm');
+        $this->db->join('pendaftaran', 'pemeriksaan.id_pendaftaran = pendaftaran.id_pendaftaran');
+        $this->db->join('pasien', 'pendaftaran.id_pasien = pasien.id_pasien');
+        $this->db->join('dokter_poli', 'pendaftaran.id_dokter_poli = dokter_poli.id_dokter_poli');
+        $this->db->join('dokter', 'dokter_poli.id_dokter = dokter.id_dokter');
+        $this->db->join('poli', 'dokter_poli.id_poli = poli.id_poli');
+        $this->db->where('id_pembayaran', $id);
+        return $this->db->get()->row();
+    }
     public function kandidat_pembayaran()
     {
         $this->db->select('*');

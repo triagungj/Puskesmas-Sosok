@@ -28,6 +28,17 @@ class Pembayaran extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function print_pembayaran()
+    {
+        $id_pembayaran = $this->input->post('id_pembayaran');
+        $pembayaran = $this->model_pembayaran->select_data($id_pembayaran);
+
+        $pembayaran->obat = $this->model_obat_tindakan->select_data($pembayaran->id_tindakan)->result();
+
+        $data['pembayaran'] = $pembayaran;
+        $this->load->view('print/print_pembayaran', $data);
+    }
+
     public function proses_pembayaran()
     {
         $id_pembayaran = $this->input->post('id_pembayaran');
