@@ -8,6 +8,13 @@ class Model_obat extends CI_Model
         $sql = "SELECT * FROM $this->table";
         return $this->db->query($sql)->num_rows();
     }
+    public function get_all_data()
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->order_by('nama_obat', 'ASC');
+        return $this->db->get();
+    }
     public function tampil_data($per_page, $offset)
     {
         $sql = "SELECT * FROM $this->table ORDER BY id_obat DESC LIMIT $per_page OFFSET $offset";

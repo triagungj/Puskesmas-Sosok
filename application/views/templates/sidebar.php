@@ -4,7 +4,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -55,10 +55,6 @@
                     </div>
                 </div>
             </li>
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Transaksi
-            </div>
             <?php if ($this->session->jabatan != 'dokter') { ?>
                 <li class="nav-item <?= $page == 'pasien' ? 'active' : ''; ?>">
                     <a class="nav-link" href="<?php echo base_url('pasien') ?>">
@@ -66,6 +62,11 @@
                         <span>Pasien</span></a>
                 </li>
             <?php } ?>
+            <!-- Heading -->
+            <div class="sidebar-heading mt-2">
+                Transaksi
+            </div>
+
 
             <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
                 <li class="nav-item <?= $page == 'pendaftaran' ? 'active' : ''; ?>">

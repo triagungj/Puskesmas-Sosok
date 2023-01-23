@@ -1,8 +1,8 @@
 <?php
 
-class Model_pemeriksaan extends CI_Model
+class Model_tindakan extends CI_Model
 {
-    protected $table = 'pemeriksaan';
+    protected $table = 'tindakan';
     public function count()
     {
         return $this->db->count_all($this->table);
@@ -11,17 +11,18 @@ class Model_pemeriksaan extends CI_Model
     {
         return $this->db->get($this->table);
     }
-    public function kandidat_pemeriksaan()
+    public function kandidat_tindakan()
     {
         $this->db->select('*');
         $this->db->from($this->table);
+        $this->db->join('pemeriksaan', 'tindakan.no_rm = pemeriksaan.no_rm', 'right');
         $this->db->join('pendaftaran', 'pemeriksaan.id_pendaftaran = pendaftaran.id_pendaftaran', 'right');
         $this->db->join('pasien', 'pendaftaran.id_pasien = pasien.id_pasien', 'right');
         $this->db->join('dokter_poli', 'pendaftaran.id_dokter_poli = dokter_poli.id_dokter_poli', 'right');
         $this->db->join('dokter', 'dokter_poli.id_dokter = dokter.id_dokter', 'right');
         $this->db->join('poli', 'dokter_poli.id_poli = poli.id_poli', 'right');
-        $this->db->where('pemeriksaan.no_rm IS NULL');
-        $this->db->where('pasien.id_pasien IS NOT NULL');
+        $this->db->where('tindakan.no_rm IS NULL');
+        $this->db->where('pemeriksaan.id_pendaftaran IS NOT NULL');
         $this->db->order_by('tgl_pendaftaran', 'DESC');
         return $this->db->get();
     }
@@ -29,6 +30,7 @@ class Model_pemeriksaan extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($this->table);
+        $this->db->join('pemeriksaan', 'tindakan.no_rm = pemeriksaan.no_rm');
         $this->db->join('pendaftaran', 'pemeriksaan.id_pendaftaran = pendaftaran.id_pendaftaran');
         $this->db->join('pasien', 'pendaftaran.id_pasien = pasien.id_pasien');
         $this->db->join('dokter_poli', 'pendaftaran.id_dokter_poli = dokter_poli.id_dokter_poli');
@@ -41,14 +43,14 @@ class Model_pemeriksaan extends CI_Model
     public function input_data($data)
     {
         if ($this->db->insert($this->table, $data)) {
-            return true;
+            return $this->db->insert_id();
         } else {
-            return false;
+            return null;
         }
     }
-    public function edit_pemeriksaan($data, $id)
+    public function edit_tindakan($data, $id)
     {
-        if ($this->db->update($this->table, $data, array('no_rm' => $id))) {
+        if ($this->db->update($this->table, $data, array('id_tindakan' => $id))) {
             return true;
         } else {
             return false;

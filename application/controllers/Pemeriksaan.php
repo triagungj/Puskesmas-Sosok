@@ -9,7 +9,7 @@ class Pemeriksaan extends CI_Controller
         $offset = $offset_index * $per_page;
         $total_page = ceil($this->model_pemeriksaan->count() / $per_page);
         $list_pemeriksaan = $this->model_pemeriksaan->tampil_data($offset, $per_page)->result();
-        $list_pendaftaran = $this->model_pemeriksaan->kandidat_pemeriksaan($offset, $per_page)->result();
+        $list_pendaftaran = $this->model_pemeriksaan->kandidat_pemeriksaan()->result();
 
         $data['pemeriksaan'] = $list_pemeriksaan;
         $data['list_pendaftaran'] = $list_pendaftaran;
