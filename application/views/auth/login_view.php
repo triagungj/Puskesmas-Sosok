@@ -12,7 +12,7 @@ $this->load->view('templates/header'); ?>
     </div>
 <?php } ?>
 
-<body class="bg-primary">
+<body class="bg-gradient-success">
     <div class="container">
         <div class="row justify-content-center align-middle">
             <div class="col-lg-5">

@@ -35,8 +35,9 @@
                         </td>
                         <td><?= $tindakan->tgl_tindakan ?></td>
                         <td class="text-center">
-                            <button onclick="showEditModal('<?= $tindakan->no_rm; ?>', '<?= $tindakan->nama_pasien; ?>', 
-                            '<?= $tindakan->nik; ?>', '<?= $tindakan->nama_poli; ?>', '<?= $tindakan->nama_dokter; ?>', '<?= $tindakan->keterangan; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_tindakan">
+                            <button onclick="showEditModal('<?= $tindakan->id_tindakan; ?>', '<?= $tindakan->no_rm; ?>', '<?= $tindakan->nama_pasien; ?>', 
+                            '<?= $tindakan->nama_poli; ?>', '<?= $tindakan->nama_dokter; ?>', '<?= $tindakan->nama_tindakan; ?>', 
+                            '<?= $tindakan->jumlah_biaya; ?>', '')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_tindakan">
                                 <i class="fas fa-edit"></i></button>
                         </td>
                         <td class="text-center">
@@ -73,7 +74,7 @@
 <div class="modal fade" id="empty_dialog" tabindex="-1" role="dialog" aria-hidden="true">
     <?php
     $empty_data['empty_title'] = 'Perhatian';
-    $empty_data['empty_desc'] = 'Gagal menambah data tindakan karena belum ada data pendaftaran baru. Harap <b>tambahkan data pendaftaran</b> terlebih dahulu untuk melanjutkan tindakan';
+    $empty_data['empty_desc'] = 'Gagal menambah data tindakan karena belum ada data pendaftaran baru. Harap <b>tambahkan data pemeriksaan</b> terlebih dahulu untuk melanjutkan tindakan.';
     $this->load->view('templates/empty_dialog', $empty_data);
     ?>
 </div>

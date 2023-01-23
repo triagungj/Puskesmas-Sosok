@@ -15,6 +15,14 @@ class Model_obat extends CI_Model
         $this->db->order_by('nama_obat', 'ASC');
         return $this->db->get();
     }
+
+    public function select_data($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('obat.id_obat', $id);
+        return $this->db->get()->row();
+    }
     public function tampil_data($per_page, $offset)
     {
         $sql = "SELECT * FROM $this->table ORDER BY id_obat DESC LIMIT $per_page OFFSET $offset";

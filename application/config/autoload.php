@@ -136,5 +136,5 @@ $autoload['model'] = array(
     'model_user', 'model_dokter', 'model_poli',
     'model_pasien', 'model_obat', 'model_dokter_poli',
     'model_pendaftaran', 'model_pemeriksaan', 'model_tindakan',
-    'model_obat_tindakan'
+    'model_obat_tindakan', 'model_pembayaran'
 );

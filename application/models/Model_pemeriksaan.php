@@ -22,7 +22,7 @@ class Model_pemeriksaan extends CI_Model
         $this->db->join('poli', 'dokter_poli.id_poli = poli.id_poli', 'right');
         $this->db->where('pemeriksaan.no_rm IS NULL');
         $this->db->where('pasien.id_pasien IS NOT NULL');
-        $this->db->order_by('tgl_pendaftaran', 'DESC');
+        $this->db->order_by('tgl_pemeriksaan', 'DESC');
         return $this->db->get();
     }
     public function tampil_data($per_page, $offset)
