@@ -11,10 +11,7 @@
                     <th width="25%">TINDAKAN</th>
                     <th width="15%">RINCIAN </th>
                     <th width="12%">PEMBAYARAN</th>
-                    <?php if ($this->session->jabatan == 'admin') { ?>
-                        <th>AKSI</th>
-                    <?php } ?>
-                    <th>PRINT</th>
+                    <th>STATUS</th>
                 </tr>
                 <?php
                 $no = $offset_index + 1;
@@ -47,32 +44,22 @@
                         </td>
                         <td class="text-justify">
                             Total Bayar: <b>Rp. <?= $pembayaran->total_pembayaran; ?>,00</b> <br />
-                            <hr>
-                            Status: <b><?= $pembayaran->status ?></b> <br /><?= $pembayaran->status == 'Lunas' ? '(Dibayar pada ' . $pembayaran->tgl_pembayaran . ')' : '' ?>
                         </td>
-                        <?php if ($this->session->jabatan == 'admin') { ?>
-
-                            <td class="text-center">
-                                <?php if ($pembayaran->status == "Belum Lunas") { ?>
-                                    <input hidden name="id_pembayaran" type="text" value="<?= $pembayaran->id_pembayaran; ?>">
-                                    <button onclick="showProsesBayarModal('<?= $pembayaran->id_pembayaran; ?>', '<?= $pembayaran->no_rm; ?>', 
-                                '<?= $pembayaran->nama_pasien; ?>', '<?= $pembayaran->nama_poli; ?>', 
-                                '<?= $pembayaran->nama_dokter; ?>')" type="submit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#proses_bayar">
-                                        PROSES BAYAR</button>
+                        <td>
+                            <div class="px-3 mb-1">
+                                <?php if ($pembayaran->status == 'Lunas') { ?>
+                                    <div class="rounded bg-success text-center">
+                                        <i class="fas fa-check text-light"></i>
+                                    </div>
                                 <?php } else { ?>
-                                    <button disabled class="btn btn-warning btn-sm">
-                                        <i class="fas fa-check"></i>
-                                    </button>
+                                    <div class="rounded bg-danger text-center">
+                                        <i class="fas fa-times text-light"></i>
+                                    </div>
                                 <?php } ?>
-                            </td>
-                        <?php } ?>
-                        <td class="text-center">
-                            <form action="<?= base_url('pembayaran/print_pembayaran'); ?>" method="post" target="_blank">
-                                <input hidden type="text" name="id_pembayaran" value="<?= $pembayaran->id_pembayaran; ?>">
-                                <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" ">
-                                    <i class=" fas fa-print"></i>
-                                </button>
-                            </form>
+                            </div>
+                            <div class="text-center"><b><?= $pembayaran->status ?></b></div>
+                            <?= $pembayaran->status == 'Lunas' ? 'Dibayar pada ' . $pembayaran->tgl_pembayaran : '' ?>
+
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -89,7 +76,7 @@
                 <?php if ($total_page != 1) {
                     for ($i = 1; $i <= $total_page; $i++) { ?>
                         <li class="page-item <?= $i == $page_index ? 'active' : ''; ?>">
-                            <a class="page-link" href="<?= base_url('pembayaran?page=' . $i); ?>"><?= $i; ?></a>
+                            <a class="page-link" href="<?= base_url('laporan/laporan_pembayaran?page=' . $i); ?>"><?= $i; ?></a>
                         </li>
                 <?php }
                 } ?>
@@ -98,14 +85,4 @@
         </nav>
     </div>
     <div style="height: 50px;"></div>
-</div>
-<div class="modal fade" id="proses_bayar" tabindex="-1" role="dialog" aria-hidden="true">
-    <?php
-    $this->load->view('transaksi/pembayaran/form_proses_bayar');
-    ?>
-</div>
-<div class="modal fade" id="batalkan_bayar" tabindex="-1" role="dialog" aria-hidden="true">
-    <?php
-    $this->load->view('transaksi/pembayaran/form_batal_bayar');
-    ?>
 </div>

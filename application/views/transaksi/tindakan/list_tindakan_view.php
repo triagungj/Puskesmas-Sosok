@@ -33,11 +33,15 @@
                         <td><?= $tindakan->nama_poli . ' - ' . $tindakan->nama_dokter ?> (<?= $tindakan->spesialisasi; ?>)</td>
                         <td>Rp. <?= $tindakan->jumlah_biaya ?>,00</td>
                         <td>
-                            <ul class="pl-3">
-                                <?php foreach ($tindakan->obat as $obat) : ?>
-                                    <li><?= $obat->nama_obat ?> (<?= $obat->jumlah_obat; ?> <?= $obat->satuan; ?>) <br /></li>
-                                <?php endforeach; ?>
-                            </ul>
+                            <?php if ($tindakan->obat != null) { ?>
+                                <ul class="pl-3">
+                                    <?php foreach ($tindakan->obat as $obat) : ?>
+                                        <li><?= $obat->nama_obat ?> (<?= $obat->jumlah_obat; ?> <?= $obat->satuan; ?>) <br /></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php } else { ?>
+                                <h6 class="text-center">-</h6>
+                            <?php } ?>
                         </td>
                         <td><?= $tindakan->tgl_tindakan ?></td>
                         <?php if ($this->session->jabatan == 'dokter') { ?>

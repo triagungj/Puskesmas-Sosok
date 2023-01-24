@@ -30,11 +30,11 @@
                 </div>
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item <?= $page == 'master' ? 'active' : ''; ?>"">
-                 <a class=" nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                 <a class=" nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMaster" aria-expanded="true" aria-controls="collapseMaster">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Data Master</span>
                     </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div id="collapseMaster" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Menu Data Master:</h6>
                             <?php if ($this->session->jabatan == 'admin') { ?>
@@ -84,12 +84,23 @@
                         <i class="fas fa-fw fa-chart-area"></i>
                         <span>Pembayaran</span></a>
                 </li>
-
-                <!-- <li class="nav-item <?= $page == 'laporan' ? 'active' : ''; ?>">
-                    <a class="nav-link" href="<?php echo base_url('laporan') ?>">
+                <li class="nav-item <?= $page == 'laporan' ? 'active' : ''; ?>">
+                    <a class=" nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLaporan" aria-expanded="true" aria-controls="collapseLaporan">
                         <i class="fas fa-fw fa-newspaper"></i>
-                        <span>Laporan</span></a>
-                </li> -->
+                        <span>Laporan</span>
+                    </a>
+                    <div id="collapseLaporan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Menu Laporan:</h6>
+                            <a class="collapse-item" href="<?php echo base_url('laporan/laporan_pendaftaran') ?>">Laporan Pendaftaran</a>
+                            <a class="collapse-item" href="<?php echo base_url('laporan/laporan_pemeriksaan') ?>">Laporan Pemeriksaan</a>
+                            <a class="collapse-item" href="<?php echo base_url('laporan/laporan_pembayaran') ?>">Laporan Pembayaran</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item <?= $page == 'laporan' ? 'active' : ''; ?>">
+
+                </li>
             <?php } ?>
 
             <!-- Divider -->

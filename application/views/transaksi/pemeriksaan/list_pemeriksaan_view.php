@@ -31,7 +31,7 @@
                             <p class="m-0"><?= $pemeriksaan->keterangan ?></p>
                         </td>
                         <td><?= $pemeriksaan->nama_poli . ' - ' . $pemeriksaan->nama_dokter ?> (<?= $pemeriksaan->spesialisasi; ?>)</td>
-                        <td><?= $pemeriksaan->tgl_pendaftaran ?></td>
+                        <td><?= $pemeriksaan->tgl_pemeriksaan ?></td>
                         <?php if ($this->session->jabatan == 'dokter') { ?>
 
                             <td class="text-center">

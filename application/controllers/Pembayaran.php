@@ -11,6 +11,10 @@ class Pembayaran extends CI_Controller
         $list_pembayaran = $this->model_pembayaran->tampil_data($offset, $per_page)->result();
         $list_tindakan = $this->model_pembayaran->kandidat_pembayaran()->result();
 
+        foreach ($list_pembayaran as $pembayaran) {
+            $pembayaran->obat = $this->model_obat_tindakan->select_data($pembayaran->id_tindakan)->result();
+        }
+
         $data['list_pembayaran'] = $list_pembayaran;
         $data['list_tindakan'] = $list_tindakan;
         $data['page_index'] = $get_page;

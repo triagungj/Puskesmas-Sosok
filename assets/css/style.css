@@ -3,6 +3,9 @@
     overflow-x:auto;
     min-height: 300px;
 }
+.table-custom{
+  background-color: #ffffff;
+}
 .table-custom tr th{
     text-align: center;
 }

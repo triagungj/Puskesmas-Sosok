@@ -10,7 +10,8 @@
                     <th>NAMA PASIEN</th>
                     <th>NIK</th>
                     <th>ALAMAT</th>
-                    <th width="20%">KELUHAN</th>
+                    <th>OPSI DAFTAR</th>
+                    <th width="30%">KELUHAN</th>
                     <th>DOKTER POLI</th>
                     <th>TANGGAL DAFTAR</th>
                     <th>PRINT</th>
@@ -18,7 +19,6 @@
                         <th colspan="2">AKSI</th>
                     <?php } ?>
                 </tr>
-
                 <?php
                 $no = $offset_index + 1;
                 foreach ($pendaftaran as $pendaftaran) : ?>
@@ -27,6 +27,7 @@
                         <td><?= $pendaftaran->nama_pasien ?></td>
                         <td><?= $pendaftaran->nik ?></td>
                         <td><?= $pendaftaran->alamat ?></td>
+                        <td><?= $pendaftaran->opsi ?> <?= $pendaftaran->nomor_kartu != null ? '(' . $pendaftaran->nomor_kartu . ')' : ''; ?></td>
                         <td><?= $pendaftaran->keluhan ?></td>
                         <td><?= $pendaftaran->nama_poli . ' - ' . $pendaftaran->nama_dokter ?> (<?= $pendaftaran->spesialisasi; ?>)</td>
                         <td><?= $pendaftaran->tgl_pendaftaran ?></td>
