@@ -1,7 +1,9 @@
 <div class="container-fluid">
-    <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="<?= $list_pemeriksaan != null ? "#tambah_tindakan" : "#empty_dialog"  ?>">
-        <i class="fas fa-plus fa-sm"></i> Tambah Tindakan
-    </button>
+    <?php if ($this->session->jabatan == 'dokter') { ?>
+        <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="<?= $list_pemeriksaan != null ? "#tambah_tindakan" : "#empty_dialog"  ?>">
+            <i class="fas fa-plus fa-sm"></i> Tambah Tindakan
+        </button>
+    <?php } ?>
     <div class="table-custom-wrapper">
         <?php if ($list_tindakan != null) { ?>
             <table class="table table-bordered table-custom">
@@ -14,7 +16,9 @@
                     <th width="14%">BIAYA TINDAKAN</th>
                     <th>Obat</th>
                     <th>TANGGAL</th>
-                    <th width="3%" colspan="2">AKSI</th>
+                    <?php if ($this->session->jabatan == 'dokter') { ?>
+                        <th width="3%" colspan="2">AKSI</th>
+                    <?php } ?>
                 </tr>
                 <?php
                 $no = $offset_index + 1;
@@ -36,16 +40,18 @@
                             </ul>
                         </td>
                         <td><?= $tindakan->tgl_tindakan ?></td>
-                        <td class="text-center">
-                            <button onclick="showEditModal('<?= $tindakan->id_tindakan; ?>', '<?= $tindakan->no_rm; ?>', '<?= $tindakan->nama_pasien; ?>', 
+                        <?php if ($this->session->jabatan == 'dokter') { ?>
+                            <td class="text-center">
+                                <button onclick="showEditModal('<?= $tindakan->id_tindakan; ?>', '<?= $tindakan->no_rm; ?>', '<?= $tindakan->nama_pasien; ?>', 
                             '<?= $tindakan->nama_poli; ?>', '<?= $tindakan->nama_dokter; ?>', '<?= $tindakan->nama_tindakan; ?>', 
                             '<?= $tindakan->jumlah_biaya; ?>', '<?= $obat_str ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_tindakan">
-                                <i class="fas fa-edit"></i></button>
-                        </td>
-                        <td class="text-center">
-                            <button onclick="showDeleteModal('<?= $tindakan->id_tindakan; ?>', '<?= $tindakan->no_rm ?>', '<?= $tindakan->nama_pasien; ?>', '<?= $tindakan->nama_poli; ?>', '<?= $tindakan->nama_dokter; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_tindakan">
-                                <i class="fas fa-trash"></i></button>
-                        </td>
+                                    <i class="fas fa-edit"></i></button>
+                            </td>
+                            <td class="text-center">
+                                <button onclick="showDeleteModal('<?= $tindakan->id_tindakan; ?>', '<?= $tindakan->no_rm ?>', '<?= $tindakan->nama_pasien; ?>', '<?= $tindakan->nama_poli; ?>', '<?= $tindakan->nama_dokter; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_tindakan">
+                                    <i class="fas fa-trash"></i></button>
+                            </td>
+                        <?php } ?>
                     </tr>
                 <?php endforeach; ?>
             </table>

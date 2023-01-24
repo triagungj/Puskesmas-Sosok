@@ -33,6 +33,15 @@ class Model_pendaftaran extends CI_model
         $this->db->limit($offset, $per_page);
         return $this->db->get();
     }
+    public function group_total_data()
+    {
+        $this->db->select('pendaftaran.id_pendaftaran, poli.nama_poli, COUNT(pendaftaran.id_pendaftaran) as total');
+        $this->db->from($this->table);
+        $this->db->join('dokter_poli', 'pendaftaran.id_dokter_poli = dokter_poli.id_dokter_poli', 'right');
+        $this->db->join('poli', 'dokter_poli.id_poli = poli.id_poli');
+        $this->db->group_by('poli.id_poli');
+        return $this->db->get();
+    }
     public function input_data($data)
     {
         if ($this->db->insert($this->table, $data)) {

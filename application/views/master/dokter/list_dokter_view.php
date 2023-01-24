@@ -1,5 +1,7 @@
 <div class="container-fluid">
-  <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="#tambah_dokter"><i class="fas fa-plus fa-sm"></i> Tambah Dokter</button>
+  <?php if ($this->session->jabatan == 'admin') { ?>
+    <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="#tambah_dokter"><i class="fas fa-plus fa-sm"></i> Tambah Dokter</button>
+  <?php } ?>
   <div class="table-custom-wrapper">
     <?php if ($dokter != null) { ?>
       <table class="table table-bordered table-custom">
@@ -11,7 +13,9 @@
           <th>TANGGAL LAHIR</th>
           <th>JENIS KELAMIN</th>
           <th>SPESIALISASI</th>
-          <th colspan="2">AKSI</th>
+          <?php if ($this->session->jabatan == 'admin') { ?>
+            <th colspan="2">AKSI</th>
+          <?php } ?>
         </tr>
 
         <?php
@@ -41,18 +45,20 @@
             <td><?php echo $dokter->jenis_kelamin ?></td>
             <td><?php echo $dokter->spesialisasi ?></td>
 
-            <td class="text-center">
-              <button onclick="showEditModal('<?= $dokter->username; ?>', '<?= $dokter->id_dokter ?>', '<?= $dokter->id_user; ?>', '<?= $dokter->nama_dokter; ?>', '<?= $dokter->tgl_lahir; ?>', '<?= $dokter->jenis_kelamin; ?>', '<?= $dokter->spesialisasi; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_dokter">
-                <i class="fas fa-edit"></i></button>
-            </td>
-            <td class="text-center">
-              <?php if ($this->session->id_user != $dokter->id_user) { ?>
+            <?php if ($this->session->jabatan == 'admin') { ?>
+              <td class="text-center">
+                <button onclick="showEditModal('<?= $dokter->username; ?>', '<?= $dokter->id_dokter ?>', '<?= $dokter->id_user; ?>', '<?= $dokter->nama_dokter; ?>', '<?= $dokter->tgl_lahir; ?>', '<?= $dokter->jenis_kelamin; ?>', '<?= $dokter->spesialisasi; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_dokter">
+                  <i class="fas fa-edit"></i></button>
+              </td>
+              <td class="text-center">
+                <?php if ($this->session->id_user != $dokter->id_user) { ?>
 
-                <button onclick="showDeleteModal('<?= $dokter->id_user ?>', '<?= $dokter->nama_dokter; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_user">
-                  <i class="fas fa-trash"></i>
-                </button>
-              <?php } ?>
-            </td>
+                  <button onclick="showDeleteModal('<?= $dokter->id_user ?>', '<?= $dokter->nama_dokter; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_user">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                <?php } ?>
+              </td>
+            <?php } ?>
 
           </tr>
         <?php endforeach; ?>

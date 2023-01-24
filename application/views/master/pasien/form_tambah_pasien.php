@@ -46,7 +46,7 @@
                     </select>
                 </div>
                 <div class="mb-3 text-input form-group">
-                    <label for="inputNoHp" class="text-dark">Alamat</label>
+                    <label for="inputNoHp" class="text-dark">No HP </label>
                     <input required name="no_hp" type="text" class="form-control" id="inputNoHp" placeholder="No HP Pasien" />
                 </div>
             </div>

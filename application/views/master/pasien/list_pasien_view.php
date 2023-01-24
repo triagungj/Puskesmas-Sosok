@@ -1,7 +1,6 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <?php if ($this->session->jabatan != 'kepala_puskesmas') { ?>
-
         <button class="btn btn-sm btn-primary " data-toggle="modal" data-target="#tambah_pasien"><i class="fas fa-plus fa-sm"></i> Tambah Pasien</button>
     <?php } ?>
     <div class="pt-4 table-custom-wrapper">

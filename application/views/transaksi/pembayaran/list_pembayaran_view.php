@@ -10,7 +10,9 @@
                     <th>TOTAL BAYAR</th>
                     <th>TANGGAL BAYAR</th>
                     <th>STATUS</th>
-                    <th>AKSI</th>
+                    <?php if ($this->session->jabatan == 'admin') { ?>
+                        <th>AKSI</th>
+                    <?php } ?>
                     <th>PRINT</th>
                 </tr>
                 <?php
@@ -24,23 +26,26 @@
                         <td>Rp. <?= $pembayaran->total_pembayaran; ?>,00</td>
                         <td class="text-center"><?= $pembayaran->tgl_pembayaran ?? '-' ?></td>
                         <td><?= $pembayaran->status ?></td>
-                        <td class="text-center">
-                            <?php if ($pembayaran->status == "Belum Lunas") { ?>
-                                <input hidden name="id_pembayaran" type="text" value="<?= $pembayaran->id_pembayaran; ?>">
-                                <button onclick="showProsesBayarModal('<?= $pembayaran->id_pembayaran; ?>', '<?= $pembayaran->no_rm; ?>', 
+                        <?php if ($this->session->jabatan == 'admin') { ?>
+
+                            <td class="text-center">
+                                <?php if ($pembayaran->status == "Belum Lunas") { ?>
+                                    <input hidden name="id_pembayaran" type="text" value="<?= $pembayaran->id_pembayaran; ?>">
+                                    <button onclick="showProsesBayarModal('<?= $pembayaran->id_pembayaran; ?>', '<?= $pembayaran->no_rm; ?>', 
                                 '<?= $pembayaran->nama_pasien; ?>', '<?= $pembayaran->nama_poli; ?>', 
                                 '<?= $pembayaran->nama_dokter; ?>')" type="submit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#proses_bayar">
-                                    PROSES BAYAR</button>
-                            <?php } else { ?>
-                                <button disabled class="btn btn-success btn-sm">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                            <?php } ?>
-                        </td>
+                                        PROSES BAYAR</button>
+                                <?php } else { ?>
+                                    <button disabled class="btn btn-warning btn-sm">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                <?php } ?>
+                            </td>
+                        <?php } ?>
                         <td class="text-center">
                             <form action="<?= base_url('pembayaran/print_pembayaran'); ?>" method="post" target="_blank">
                                 <input hidden type="text" name="id_pembayaran" value="<?= $pembayaran->id_pembayaran; ?>">
-                                <button type="submit" class="btn btn-success btn-sm" data-toggle="modal" ">
+                                <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" ">
                                     <i class=" fas fa-print"></i>
                                 </button>
                             </form>

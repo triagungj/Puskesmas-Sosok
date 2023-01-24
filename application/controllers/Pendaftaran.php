@@ -48,12 +48,20 @@ class Pendaftaran extends CI_Controller
         $tgl_pendaftaran = date("Y-m-d H:i:s");
         $id_pasien = $this->input->post('id_pasien');
         $id_dokter_poli = $this->input->post('id_dokter_poli');
+        $nomor_kartu = $this->input->post('nomor_kartu');
+        $opsi = $this->input->post('opsi');
+
+        if ($opsi == 'Lain-lain') {
+            $opsi = $this->input->post('opsi_lain');
+        }
 
         $data = array(
             'keluhan' => $keluhan,
             'tgl_pendaftaran' => $tgl_pendaftaran,
             'id_pasien' => $id_pasien,
             'id_dokter_poli' => $id_dokter_poli,
+            'opsi' => $opsi,
+            'nomor_kartu' => $nomor_kartu,
         );
 
         if ($this->model_pendaftaran->input_data($data)) {
@@ -75,10 +83,18 @@ class Pendaftaran extends CI_Controller
         $keluhan = preg_replace("/[\n\r]/", "<br />", $this->input->post('keluhan'));
         $keluhan = str_replace("<br /><br />", "<br />", $keluhan);
         $id_dokter_poli = $this->input->post('id_dokter_poli');
+        $nomor_kartu = $this->input->post('nomor_kartu');
+        $opsi = $this->input->post('opsi');
+
+        if ($opsi == 'Lain-lain') {
+            $opsi = $this->input->post('opsi_lain');
+        }
 
         $data = array(
             'keluhan' => $keluhan,
             'id_dokter_poli' => $id_dokter_poli,
+            'opsi' => $opsi,
+            'nomor_kartu' => $nomor_kartu,
         );
 
         if ($this->model_pendaftaran->edit_pendaftaran($data, $id_pendaftaran)) {

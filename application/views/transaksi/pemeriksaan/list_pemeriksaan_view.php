@@ -1,7 +1,9 @@
 <div class="container-fluid">
-    <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="<?= $list_pendaftaran != null ? "#tambah_pemeriksaan" : "#empty_dialog"  ?>">
-        <i class="fas fa-plus fa-sm"></i> Tambah Pemeriksaan
-    </button>
+    <?php if ($this->session->jabatan == 'dokter') { ?>
+        <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="<?= $list_pendaftaran != null ? "#tambah_pemeriksaan" : "#empty_dialog"  ?>">
+            <i class="fas fa-plus fa-sm"></i> Tambah Pemeriksaan
+        </button>
+    <?php } ?>
     <div class="table-custom-wrapper">
         <?php if ($pemeriksaan != null) { ?>
             <table class="table table-bordered table-custom">
@@ -13,7 +15,9 @@
                     <th width="20%">KETERANGAN</th>
                     <th>DOKTER POLI</th>
                     <th>TANGGAL</th>
-                    <th colspan="2">AKSI</th>
+                    <?php if ($this->session->jabatan == 'dokter') { ?>
+                        <th colspan="2">AKSI</th>
+                    <?php } ?>
                 </tr>
                 <?php
                 $no = $offset_index + 1;
@@ -28,15 +32,18 @@
                         </td>
                         <td><?= $pemeriksaan->nama_poli . ' - ' . $pemeriksaan->nama_dokter ?> (<?= $pemeriksaan->spesialisasi; ?>)</td>
                         <td><?= $pemeriksaan->tgl_pendaftaran ?></td>
-                        <td class="text-center">
-                            <button onclick="showEditModal('<?= $pemeriksaan->no_rm; ?>', '<?= $pemeriksaan->nama_pasien; ?>', 
+                        <?php if ($this->session->jabatan == 'dokter') { ?>
+
+                            <td class="text-center">
+                                <button onclick="showEditModal('<?= $pemeriksaan->no_rm; ?>', '<?= $pemeriksaan->nama_pasien; ?>', 
                             '<?= $pemeriksaan->nik; ?>', '<?= $pemeriksaan->nama_poli; ?>', '<?= $pemeriksaan->nama_dokter; ?>', '<?= $pemeriksaan->keterangan; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_pemeriksaan">
-                                <i class="fas fa-edit"></i></button>
-                        </td>
-                        <td class="text-center">
-                            <button onclick="showDeleteModal('<?= $pemeriksaan->no_rm ?>', '<?= $pemeriksaan->nama_pasien; ?>', '<?= $pemeriksaan->nama_poli; ?>', '<?= $pemeriksaan->nama_dokter; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_pemeriksaan">
-                                <i class="fas fa-trash"></i></button>
-                        </td>
+                                    <i class="fas fa-edit"></i></button>
+                            </td>
+                            <td class="text-center">
+                                <button onclick="showDeleteModal('<?= $pemeriksaan->no_rm ?>', '<?= $pemeriksaan->nama_pasien; ?>', '<?= $pemeriksaan->nama_poli; ?>', '<?= $pemeriksaan->nama_dokter; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_pemeriksaan">
+                                    <i class="fas fa-trash"></i></button>
+                            </td>
+                        <?php } ?>
                     </tr>
                 <?php endforeach; ?>
             </table>

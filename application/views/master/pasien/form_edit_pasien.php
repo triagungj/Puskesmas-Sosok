@@ -8,10 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="mb-3 text-input form-group">
-                    <label for="inputIdPasienEdit" class="text-dark">Edit Pasien dengan nama <b><span id="namaPasienEdit"></b></span></label>
-                    <input hidden required name="id_pasien" type="text" class="form-control" id="inputIdPasienEdit" />
-                </div>
+                <input hidden required name="id_pasien" type="text" class="form-control" id="inputIdPasienEdit" />
                 <div class="mb-3 text-input form-group">
                     <label for="inputNamaPasienEdit" class="text-dark">Nama Pasien</label>
                     <input required name="nama_pasien" type="text" class="form-control" id="inputNamaPasienEdit" placeholder="Nama Pasien" />
@@ -50,7 +47,7 @@
                     </select>
                 </div>
                 <div class="mb-3 text-input form-group">
-                    <label for="inputNoHpEdit" class="text-dark">Alamat</label>
+                    <label for="inputNoHpEdit" class="text-dark">No HP</label>
                     <input required name="no_hp" type="text" class="form-control" id="inputNoHpEdit" placeholder="No HP Pasien" />
                 </div>
             </div>

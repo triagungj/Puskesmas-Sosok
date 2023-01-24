@@ -1,5 +1,7 @@
 <div class="container-fluid">
-    <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="#tambah_pendaftaran"><i class="fas fa-plus fa-sm"></i> Tambah Pendaftaran</button>
+    <?php if ($this->session->jabatan == 'admin') { ?>
+        <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="#tambah_pendaftaran"><i class="fas fa-plus fa-sm"></i> Tambah Pendaftaran</button>
+    <?php } ?>
     <div class="table-custom-wrapper">
         <?php if ($pendaftaran != null) { ?>
             <table class="table table-bordered table-custom">
@@ -12,7 +14,9 @@
                     <th>DOKTER POLI</th>
                     <th>TANGGAL DAFTAR</th>
                     <th>PRINT</th>
-                    <th colspan="2">AKSI</th>
+                    <?php if ($this->session->jabatan == 'admin') { ?>
+                        <th colspan="2">AKSI</th>
+                    <?php } ?>
                 </tr>
 
                 <?php
@@ -26,22 +30,27 @@
                         <td><?= $pendaftaran->keluhan ?></td>
                         <td><?= $pendaftaran->nama_poli . ' - ' . $pendaftaran->nama_dokter ?> (<?= $pendaftaran->spesialisasi; ?>)</td>
                         <td><?= $pendaftaran->tgl_pendaftaran ?></td>
-                        <td class="text-center">
-                            <form action="<?= base_url('pendaftaran/print_pendaftaran'); ?>" method="post" target="_blank">
-                                <input hidden type="text" name="id_pendaftaran" value="<?= $pendaftaran->id_pendaftaran; ?>">
-                                <button type="submit" class="btn btn-success btn-sm" data-toggle="modal" ">
+                        <?php if ($this->session->jabatan == 'admin') { ?>
+
+                            <td class="text-center">
+                                <form action="<?= base_url('pendaftaran/print_pendaftaran'); ?>" method="post" target="_blank">
+                                    <input hidden type="text" name="id_pendaftaran" value="<?= $pendaftaran->id_pendaftaran; ?>">
+                                    <button type="submit" class="btn btn-success btn-sm" data-toggle="modal" ">
                                     <i class=" fas fa-print"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td class="text-center">
-                            <button onclick="showEditModal('<?= $pendaftaran->id_pendaftaran; ?>', '<?= $pendaftaran->id_pasien; ?>', '<?= $pendaftaran->keluhan; ?>', '<?= $pendaftaran->id_dokter_poli; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_pendaftaran">
-                                <i class="fas fa-edit"></i></button>
-                        </td>
-                        <td class="text-center">
-                            <button onclick="showDeleteModal('<?= $pendaftaran->id_pendaftaran ?>', '<?= $pendaftaran->nama_pasien; ?>', '<?= $pendaftaran->nama_poli; ?>', '<?= $pendaftaran->nama_dokter; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_pendaftaran">
-                                <i class="fas fa-trash"></i></button>
-                        </td>
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <button onclick="showEditModal('<?= $pendaftaran->id_pendaftaran; ?>', '<?= $pendaftaran->id_pasien; ?>', 
+                                '<?= $pendaftaran->keluhan; ?>', '<?= $pendaftaran->opsi; ?>', '<?= $pendaftaran->nomor_kartu; ?>', '<?= $pendaftaran->id_dokter_poli; ?>', 
+                                )" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_pendaftaran">
+                                    <i class="fas fa-edit"></i></button>
+                            </td>
+                            <td class="text-center">
+                                <button onclick="showDeleteModal('<?= $pendaftaran->id_pendaftaran ?>', '<?= $pendaftaran->nama_pasien; ?>', '<?= $pendaftaran->nama_poli; ?>', '<?= $pendaftaran->nama_dokter; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_pendaftaran">
+                                    <i class="fas fa-trash"></i></button>
+                            </td>
+                        <?php } ?>
                     </tr>
                 <?php endforeach; ?>
             </table>

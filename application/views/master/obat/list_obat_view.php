@@ -1,7 +1,8 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-    <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="#tambah_obat"><i class="fas fa-plus fa-sm"></i> Tambah Obat</button>
+    <?php if ($this->session->jabatan == 'admin') { ?>
+        <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="#tambah_obat"><i class="fas fa-plus fa-sm"></i> Tambah Obat</button>
+    <?php } ?>
     <div class="table-custom-wrapper">
         <?php if ($obat != null) { ?>
             <table class="table table-bordered table-custom">
@@ -12,7 +13,9 @@
                     <th>HARGA</th>
                     <th>SATUAN</th>
                     <th>STOK</th>
-                    <th colspan="3">AKSI</th>
+                    <?php if ($this->session->jabatan == 'admin') { ?>
+                        <th colspan="3">AKSI</th>
+                    <?php } ?>
                 </tr>
                 <?php
                 $no = $offset_index + 1;
@@ -24,22 +27,25 @@
                         <td>Rp. <?= $obat->harga ?></td>
                         <td><?= $obat->satuan ?></td>
                         <td><?= $obat->stok ?></td>
-                        <td class="text-center">
-                            <button onclick="showTambahStokModal('<?= $obat->id_obat; ?>', 
+                        <?php if ($this->session->jabatan == 'admin') { ?>
+
+                            <td class="text-center">
+                                <button onclick="showTambahStokModal('<?= $obat->id_obat; ?>', 
                             '<?= $obat->nama_obat; ?>', '<?= $obat->stok; ?>', 
                             '<?= $obat->satuan; ?>')" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambah_stok_obat">
-                                <i class="fas fa-plus"></i></button>
-                        </td>
-                        <td class="text-center">
-                            <button onclick="showEditModal('<?= $obat->id_obat; ?>', 
+                                    <i class="fas fa-plus"></i></button>
+                            </td>
+                            <td class="text-center">
+                                <button onclick="showEditModal('<?= $obat->id_obat; ?>', 
                             '<?= $obat->nama_obat; ?>', '<?= $obat->jenis_obat; ?>', 
                             '<?= $obat->stok; ?>', '<?= $obat->satuan; ?>', '<?= $obat->harga; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_obat">
-                                <i class="fas fa-edit"></i></button>
-                        </td>
-                        <td class="text-center">
-                            <button onclick="showDeleteModal('<?= $obat->id_obat ?>', '<?= $obat->nama_obat; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_obat">
-                                <i class="fas fa-trash"></i></button>
-                        </td>
+                                    <i class="fas fa-edit"></i></button>
+                            </td>
+                            <td class="text-center">
+                                <button onclick="showDeleteModal('<?= $obat->id_obat ?>', '<?= $obat->nama_obat; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_obat">
+                                    <i class="fas fa-trash"></i></button>
+                            </td>
+                        <?php } ?>
                     </tr>
                 <?php endforeach; ?>
             </table>
