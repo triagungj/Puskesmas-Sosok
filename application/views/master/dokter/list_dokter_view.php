@@ -8,8 +8,10 @@
         <tr>
           <th>NO</th>
           <th>NAMA DOKTER</th>
-          <th>USERNAME</th>
-          <th>PASSWORD</th>
+          <?php if ($this->session->jabatan == 'admin') { ?>
+            <th>USERNAME</th>
+            <th>PASSWORD</th>
+          <?php } ?>
           <th>TANGGAL LAHIR</th>
           <th>JENIS KELAMIN</th>
           <th>SPESIALISASI</th>
@@ -24,23 +26,26 @@
           <tr>
             <th><?php echo $no++ ?></th>
             <td><?php echo $dokter->nama_dokter ?></td>
-            <td><?php echo $dokter->username ?></td>
-            <td>
-              <div class="d-flex justify-content-between align-middle">
-                <div>
-                  <span id="passShow<?= $no; ?>" class="d-none"><?= $dokter->password ?></span>
-                  <span id="passHide<?= $no; ?>">********</span>
+            <?php if ($this->session->jabatan == 'admin') { ?>
+              <td><?php echo $dokter->username ?></td>
+
+              <td>
+                <div class="d-flex justify-content-between align-middle">
+                  <div>
+                    <span id="passShow<?= $no; ?>" class="d-none"><?= $dokter->password ?></span>
+                    <span id="passHide<?= $no; ?>">********</span>
+                  </div>
+
+                  <button id="btnShowPass<?= $no; ?>" onclick="showUserPassword(<?= $no; ?>)" class="btn p-0 m-0 text-small">
+                    <i class="fa fa-eye-slash"></i>
+                  </button>
+                  <button id="btnHidePass<?= $no; ?>" onclick="hideUserPassword(<?= $no; ?>)" class="btn p-0 m-0 text-small d-none">
+                    <i class="fa fa-eye"></i>
+                  </button>
+
                 </div>
-
-                <button id="btnShowPass<?= $no; ?>" onclick="showUserPassword(<?= $no; ?>)" class="btn p-0 m-0 text-small">
-                  <i class="fa fa-eye-slash"></i>
-                </button>
-                <button id="btnHidePass<?= $no; ?>" onclick="hideUserPassword(<?= $no; ?>)" class="btn p-0 m-0 text-small d-none">
-                  <i class="fa fa-eye"></i>
-                </button>
-
-              </div>
-            </td>
+              </td>
+            <?php } ?>
             <td><?php echo $dokter->tgl_lahir ?></td>
             <td><?php echo $dokter->jenis_kelamin ?></td>
             <td><?php echo $dokter->spesialisasi ?></td>

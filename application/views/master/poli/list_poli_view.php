@@ -1,30 +1,36 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <?php if ($this->session->jabatan == 'admin') { ?>
 
-    <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="#tambah_poli"><i class="fas fa-plus fa-sm"></i> Tambah Poli</button>
+        <button class="btn btn-sm btn-primary mb-3 " data-toggle="modal" data-target="#tambah_poli"><i class="fas fa-plus fa-sm"></i> Tambah Poli</button>
+    <?php } ?>
     <div class="table-custom-wrapper">
         <?php if ($poli != null) { ?>
             <table class="table table-bordered table-custom">
                 <tr>
-                    <th>NO</th>
+                    <th width="10%">NO</th>
                     <th>NAMA POLI</th>
-                    <th colspan="2">AKSI</th>
+                    <?php if ($this->session->jabatan == 'admin') { ?>
+                        <th colspan="2">AKSI</th>
+                    <?php } ?>
                 </tr>
                 <?php
                 $no = $offset_index + 1;
                 foreach ($poli as $poli) : ?>
                     <tr>
                         <th><?php echo $no++ ?></th>
-                        <td><?php echo $poli->nama_poli ?></td>
+                        <td class="text-center"><?php echo $poli->nama_poli ?></td>
+                        <?php if ($this->session->jabatan == 'admin') { ?>
 
-                        <td class="text-center">
-                            <button onclick="showEditModal('<?= $poli->id_poli; ?>', '<?= $poli->nama_poli; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_poli">
-                                <i class="fas fa-edit"></i></button>
-                        </td>
-                        <td class="text-center">
-                            <button onclick="showDeleteModal('<?= $poli->id_poli ?>', '<?= $poli->nama_poli; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_poli">
-                                <i class="fas fa-trash"></i></button>
-                        </td>
+                            <td class="text-center">
+                                <button onclick="showEditModal('<?= $poli->id_poli; ?>', '<?= $poli->nama_poli; ?>')" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_poli">
+                                    <i class="fas fa-edit"></i></button>
+                            </td>
+                            <td class="text-center">
+                                <button onclick="showDeleteModal('<?= $poli->id_poli ?>', '<?= $poli->nama_poli; ?>')" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_poli">
+                                    <i class="fas fa-trash"></i></button>
+                            </td>
+                        <?php } ?>
                     </tr>
                 <?php endforeach; ?>
             </table>
