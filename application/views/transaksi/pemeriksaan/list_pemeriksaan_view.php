@@ -74,7 +74,7 @@
 <div class="modal fade" id="empty_dialog" tabindex="-1" role="dialog" aria-hidden="true">
     <?php
     $empty_data['empty_title'] = 'Perhatian';
-    $empty_data['empty_desc'] = 'Tidak dapat menambah data pemeriksaan karena belum ada data pendaftaran baru. Harap <b>tambahkan data pendaftaran</b> terlebih dahulu untuk melanjutkan pemeriksaan';
+    $empty_data['empty_desc'] = 'Tidak dapat menambah data pemeriksaan karena belum ada data pendaftaran baru.';
     $this->load->view('templates/empty_dialog', $empty_data);
     ?>
 </div>

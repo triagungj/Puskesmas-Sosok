@@ -3,13 +3,19 @@ class Tindakan extends CI_Controller
 {
     public function index()
     {
-        $get_page = $this->input->get('page') ?? 1;
+        $get_page = $this->input->get('page') != null ? $this->input->get('page') : 1;
         $per_page = 10;
         $offset_index = $get_page - 1;
         $offset = $offset_index * $per_page;
         $total_page = ceil($this->model_tindakan->count() / $per_page);
-        $list_tindakan = $this->model_tindakan->tampil_data($offset, $per_page)->result();
-        $list_pemeriksaan = $this->model_tindakan->kandidat_tindakan($offset, $per_page)->result();
+        if ($this->session->id_dokter != null) {
+            $id_dokter = $this->session->id_dokter;
+            $list_tindakan = $this->model_tindakan->tampil_data_by_dokter($offset, $per_page, $id_dokter)->result();
+            $list_pemeriksaan = $this->model_tindakan->kandidat_tindakan($offset, $per_page, $id_dokter)->result();
+        } else {
+            $list_tindakan = $this->model_tindakan->tampil_data($offset, $per_page)->result();
+            $list_pemeriksaan = $this->model_tindakan->kandidat_tindakan($offset, $per_page)->result();
+        }
         $list_obat = $this->model_obat->get_all_data()->result();
 
         foreach ($list_tindakan as $tindakan) {

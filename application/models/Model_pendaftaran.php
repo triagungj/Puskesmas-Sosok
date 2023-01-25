@@ -21,7 +21,7 @@ class Model_pendaftaran extends CI_model
         $this->db->where('id_pendaftaran', $id);
         return $this->db->get()->row();
     }
-    public function select_data_by_month($month)
+    public function select_data_by_month($per_page, $offset, $month)
     {
         $this->db->select('*');
         $this->db->from($this->table);
@@ -29,8 +29,10 @@ class Model_pendaftaran extends CI_model
         $this->db->join('dokter_poli', 'pendaftaran.id_dokter_poli = dokter_poli.id_dokter_poli');
         $this->db->join('dokter', 'dokter_poli.id_dokter = dokter.id_dokter');
         $this->db->join('poli', 'dokter_poli.id_poli = poli.id_poli');
-        $this->db->where('id_pendaftaran', $month, 'after');
-        return $this->db->get()->row();
+        $this->db->like('tgl_pendaftaran', $month, 'after');
+        $this->db->order_by('id_pendaftaran', 'DESC');
+        $this->db->limit($offset, $per_page);
+        return $this->db->get();
     }
     public function tampil_data($per_page, $offset)
     {

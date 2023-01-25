@@ -3,13 +3,19 @@ class Pemeriksaan extends CI_Controller
 {
     public function index()
     {
-        $get_page = $this->input->get('page') ?? 1;
+        $get_page = $this->input->get('page') != null ? $this->input->get('page') : 1;
         $per_page = 10;
         $offset_index = $get_page - 1;
         $offset = $offset_index * $per_page;
         $total_page = ceil($this->model_pemeriksaan->count() / $per_page);
-        $list_pemeriksaan = $this->model_pemeriksaan->tampil_data($offset, $per_page)->result();
-        $list_pendaftaran = $this->model_pemeriksaan->kandidat_pemeriksaan()->result();
+        if ($this->session->id_dokter != null) {
+            $id_dokter = $this->session->id_dokter;
+            $list_pemeriksaan = $this->model_pemeriksaan->tampil_data_by_dokter($offset, $per_page, $id_dokter)->result();
+            $list_pendaftaran = $this->model_pemeriksaan->kandidat_pemeriksaan_by_dokter($id_dokter)->result();
+        } else {
+            $list_pemeriksaan = $this->model_pemeriksaan->tampil_data($offset, $per_page)->result();
+            $list_pendaftaran = $this->model_pemeriksaan->kandidat_pemeriksaan()->result();
+        }
 
         $data['pemeriksaan'] = $list_pemeriksaan;
         $data['list_pendaftaran'] = $list_pendaftaran;

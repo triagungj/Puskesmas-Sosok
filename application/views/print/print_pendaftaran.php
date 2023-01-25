@@ -60,7 +60,7 @@
                             <tr>
                                 <th width="38%">NOMOR KARTU</th>
                                 <td width="2%">:</td>
-                                <td width="60%"><?= $pendaftaran->nomor_kartu ?? '-' ?></td>
+                                <td width="60%"><?= $pendaftaran->nomor_kartu != null ? $pendaftaran->nomor_kartu : '-' ?></td>
                             </tr>
                             <tr>
                                 <th width="38%">KELUHAN</th>

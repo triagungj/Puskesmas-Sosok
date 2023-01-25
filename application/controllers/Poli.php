@@ -3,7 +3,7 @@ class Poli extends CI_Controller
 {
     public function index()
     {
-        $get_page = $this->input->get('page') ?? 1;
+        $get_page = $this->input->get('page') != null ? $this->input->get('page') : 1;
         $per_page = 10;
         $offset_index = $get_page - 1;
         $offset = $offset_index * $per_page;

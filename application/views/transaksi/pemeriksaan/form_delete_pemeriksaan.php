@@ -2,7 +2,7 @@
     <div class="modal-content">
         <form action="<?= base_url('pemeriksaan/hapus_pemeriksaan'); ?>" method="post">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hapus Pendaftaran </h5>
+                <h5 class="modal-title" id="exampleModalLabel">Hapus Pemeriksaan </h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">x</span>
                 </button>

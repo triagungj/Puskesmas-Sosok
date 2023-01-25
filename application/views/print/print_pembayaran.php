@@ -3,7 +3,9 @@
 <body>
     <div class="print-page vh-100">
         <div class="container row">
-            <div class="col-6">
+            <div class="col-1"></div>
+
+            <div class="col-10">
                 <div class="row align-items-center header">
                     <div class="col-12 text-center pt-2">
                         <div>
@@ -12,9 +14,6 @@
                             <h6 class="text-headline">PUSAT KESEHATAN MASYARAKAT SOSOK</h6>
                             <div class="m-0 text-address">
                                 Jalan Oevang Oeray No. 33 Telp. (0563) 28831 Kecamatan Tayan Hulu 78562
-                            </div>
-                            <div class="m-0 text-address">
-                                Telp. (0274) 773169 Fax. (0274) 773092, email: rsaj@kulonprogokab.go.id
                             </div>
                         </div>
                     </div>
@@ -111,6 +110,7 @@
                     </div>
 
                 </div>
+                <div class="col-1"></div>
 
             </div>
         </div>

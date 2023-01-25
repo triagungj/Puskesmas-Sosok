@@ -7,12 +7,18 @@ class Laporan extends CI_Controller
     }
     public function laporan_pendaftaran()
     {
-        $get_page = $this->input->get('page') ?? 1;
+        $get_page = $this->input->get('page') != null ? $this->input->get('page') : 1;
+        $month = $this->input->get('month');
+
         $per_page = 10;
         $offset_index = $get_page - 1;
         $offset = $offset_index * $per_page;
         $total_page = ceil($this->model_pendaftaran->count() / $per_page);
-        $list_pendaftaran = $this->model_pendaftaran->tampil_data($offset, $per_page)->result();
+        if ($month != null) {
+            $list_pendaftaran = $this->model_pendaftaran->select_data_by_month($offset, $per_page, $month)->result();
+        } else {
+            $list_pendaftaran = $this->model_pendaftaran->tampil_data($offset, $per_page)->result();
+        }
 
         $data['pendaftaran'] = $list_pendaftaran;
         $data['page_index'] = $get_page;
@@ -32,13 +38,18 @@ class Laporan extends CI_Controller
 
     public function laporan_pemeriksaan()
     {
-        $get_page = $this->input->get('page') ?? 1;
+        $get_page = $this->input->get('page') != null ? $this->input->get('page') : 1;
+        $month = $this->input->get('month');
+
         $per_page = 10;
         $offset_index = $get_page - 1;
         $offset = $offset_index * $per_page;
         $total_page = ceil($this->model_pemeriksaan->count() / $per_page);
-        $list_pemeriksaan = $this->model_pemeriksaan->tampil_data($offset, $per_page)->result();
-
+        if ($month != null) {
+            $list_pemeriksaan = $this->model_pemeriksaan->select_data_by_month($offset, $per_page, $month)->result();
+        } else {
+            $list_pemeriksaan = $this->model_pemeriksaan->tampil_data($offset, $per_page)->result();
+        }
         $data['pemeriksaan'] = $list_pemeriksaan;
         $data['page_index'] = $get_page;
         $data['offset_index'] = $offset;
@@ -56,14 +67,20 @@ class Laporan extends CI_Controller
     }
     public function laporan_pembayaran()
     {
-        $get_page = $this->input->get('page') ?? 1;
+        $get_page = $this->input->get('page') != null ? $this->input->get('page') : 1;
+        $month = $this->input->get('month');
+
         $per_page = 10;
         $offset_index = $get_page - 1;
         $offset = $offset_index * $per_page;
         $total_page = ceil($this->model_pembayaran->count() / $per_page);
-        $list_pembayaran = $this->model_pembayaran->tampil_data($offset, $per_page)->result();
+        if ($month != null) {
+            $list_pembayaran = $this->model_pembayaran->select_data_by_month($offset, $per_page, $month)->result();
+        } else {
+            $list_pembayaran = $this->model_pembayaran->tampil_data($offset, $per_page)->result();
+        }
         foreach ($list_pembayaran as $pembayaran) {
-            $pembayaran->obat = $this->model_obat_tindakan->select_data($pembayaran->id_tindakan)->result();
+        $pembayaran->obat = $this->model_obat_tindakan->select_data($pembayaran->id_tindakan)->result();
         }
 
         $data['list_pembayaran'] = $list_pembayaran;

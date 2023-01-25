@@ -13,6 +13,13 @@ class Model_dokter extends CI_Model
         $this->db->order_by('id_dokter', 'DESC');
         return $this->db->get();
     }
+    public function select_by_id($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('id_user', $id);
+        return $this->db->get()->row();
+    }
     public function tampil_data($per_page, $offset)
     {
         $this->db->select('*');

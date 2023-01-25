@@ -25,6 +25,49 @@ class Model_pemeriksaan extends CI_Model
         $this->db->order_by('tgl_pemeriksaan', 'DESC');
         return $this->db->get();
     }
+    public function kandidat_pemeriksaan_by_dokter($id_dokter)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->join('pendaftaran', 'pemeriksaan.id_pendaftaran = pendaftaran.id_pendaftaran', 'right');
+        $this->db->join('pasien', 'pendaftaran.id_pasien = pasien.id_pasien', 'right');
+        $this->db->join('dokter_poli', 'pendaftaran.id_dokter_poli = dokter_poli.id_dokter_poli', 'right');
+        $this->db->join('dokter', 'dokter_poli.id_dokter = dokter.id_dokter', 'right');
+        $this->db->join('poli', 'dokter_poli.id_poli = poli.id_poli', 'right');
+        $this->db->where('dokter.id_dokter', $id_dokter);
+        $this->db->where('pemeriksaan.no_rm IS NULL');
+        $this->db->where('pasien.id_pasien IS NOT NULL');
+        $this->db->order_by('tgl_pemeriksaan', 'DESC');
+        return $this->db->get();
+    }
+    public function select_data_by_month($per_page, $offset, $month)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->join('pendaftaran', 'pemeriksaan.id_pendaftaran = pendaftaran.id_pendaftaran');
+        $this->db->join('pasien', 'pendaftaran.id_pasien = pasien.id_pasien');
+        $this->db->join('dokter_poli', 'pendaftaran.id_dokter_poli = dokter_poli.id_dokter_poli');
+        $this->db->join('dokter', 'dokter_poli.id_dokter = dokter.id_dokter');
+        $this->db->join('poli', 'dokter_poli.id_poli = poli.id_poli');
+        $this->db->like('tgl_pemeriksaan', $month, 'after');
+        $this->db->order_by('tgl_pemeriksaan', 'DESC');
+        $this->db->limit($offset, $per_page);
+        return $this->db->get();
+    }
+    public function tampil_data_by_dokter($per_page, $offset, $id_dokter)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->join('pendaftaran', 'pemeriksaan.id_pendaftaran = pendaftaran.id_pendaftaran');
+        $this->db->join('pasien', 'pendaftaran.id_pasien = pasien.id_pasien');
+        $this->db->join('dokter_poli', 'pendaftaran.id_dokter_poli = dokter_poli.id_dokter_poli');
+        $this->db->join('dokter', 'dokter_poli.id_dokter = dokter.id_dokter');
+        $this->db->join('poli', 'dokter_poli.id_poli = poli.id_poli');
+        $this->db->where('dokter.id_dokter', $id_dokter);
+        $this->db->order_by('tgl_pemeriksaan', 'DESC');
+        $this->db->limit($offset, $per_page);
+        return $this->db->get();
+    }
     public function tampil_data($per_page, $offset)
     {
         $this->db->select('*');
